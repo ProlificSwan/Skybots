@@ -1,0 +1,10 @@
+id: GUI
+language: CSharp
+name:
+  Default: GUI
+qualifiedName:
+  Default: GUI
+type: Assembly
+modifiers: {}
+items: []
+references: {}
