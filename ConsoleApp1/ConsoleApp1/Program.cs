@@ -13,9 +13,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            DisplayPinValues();
-            //DisplayPortCapabilities();
-            Console.WriteLine("Press a key");
+            //DisplayPinValues();
+            DisplayPortCapabilities();
+            Console.WriteLine("Press a key again");
             Console.ReadKey(true);
         }
 
@@ -23,6 +23,10 @@ namespace ConsoleApp1
         {
             using (var session = new ArduinoSession(new EnhancedSerialConnection("COM3", SerialBaudRate.Bps_57600)))
             {
+                session.AnalogStateReceived += Session_OnAnalogStateReceived;
+                session.SetSamplingInterval(500);
+                session.SetAnalogReportMode(0, true);
+
                 BoardCapability cap = session.GetBoardCapability();
                 BoardAnalogMapping ana = session.GetBoardAnalogMapping(); 
                 Console.WriteLine();
@@ -51,6 +55,9 @@ namespace ConsoleApp1
                         pin.PinNumber,
                         pin.Channel);
                 }
+                Console.WriteLine("Press a key");
+                Console.ReadKey(true);
+                session.SetAnalogReportMode(0, false);
             }
         }
 
@@ -61,7 +68,6 @@ namespace ConsoleApp1
                 PinState ps;
                 session.SetDigitalPinMode(13, PinMode.DigitalOutput);
                 session.SetDigitalPin(13, true);
-                session.SetAnalogReportMode(0, true);
                 for (int i = 2; i < 70; i++)
                 {
                     ps = session.GetPinState(i);
@@ -70,10 +76,15 @@ namespace ConsoleApp1
                         ps.Value,
                         ps.Mode);
                 }
+                Console.WriteLine("Press a key");
                 Console.ReadKey(true);
                 session.SetDigitalPin(13, false);
-                session.SetAnalogReportMode(0, false);
             }
+        }
+
+        static void Session_OnAnalogStateReceived(object sender, FirmataEventArgs<AnalogState> eventArgs)
+        {
+            Console.WriteLine("Analog level of pin {0}: {1}", eventArgs.Value.Channel, eventArgs.Value.Level);
         }
     }
 }
