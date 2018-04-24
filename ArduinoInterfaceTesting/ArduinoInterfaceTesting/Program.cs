@@ -23,12 +23,16 @@ namespace ArduinoInterfaceTesting
         {
             using (var session = new ArduinoSession(new EnhancedSerialConnection("COM3", SerialBaudRate.Bps_57600)))
             {
-                session.AnalogStateReceived += Session_OnAnalogStateReceived;
-                session.SetSamplingInterval(500);
+                //testing "keep alive" signal
+                session.AnalogStateReceived += (sender2, e2) => Session_OnAnalogStateReceived(sender2, e2, session); //lambda expression for doing a "delegate" function
+                session.SetSamplingInterval(1000);
                 session.SetAnalogReportMode(0, true);
 
                 BoardCapability cap = session.GetBoardCapability();
-                BoardAnalogMapping ana = session.GetBoardAnalogMapping(); 
+                BoardAnalogMapping ana = session.GetBoardAnalogMapping();
+                session.SetDigitalPinMode(13, PinMode.DigitalOutput);
+                session.SetDigitalPinMode(12, PinMode.DigitalOutput);
+                session.SetDigitalPin(13, true);
                 Console.WriteLine();
                 Console.WriteLine("Board Capability:");
 
@@ -58,6 +62,7 @@ namespace ArduinoInterfaceTesting
                 Console.WriteLine("Press a key");
                 Console.ReadKey(true);
                 session.SetAnalogReportMode(0, false);
+                session.SetDigitalPin(13, false);
             }
         }
 
@@ -82,9 +87,10 @@ namespace ArduinoInterfaceTesting
             }
         }
 
-        static void Session_OnAnalogStateReceived(object sender, FirmataEventArgs<AnalogState> eventArgs)
+        static void Session_OnAnalogStateReceived(object sender, FirmataEventArgs<AnalogState> eventArgs, ArduinoSession session)
         {
             Console.WriteLine("Analog level of pin {0}: {1}", eventArgs.Value.Channel, eventArgs.Value.Level);
+            session.SetDigitalPin(12, true);
         }
     }
 }
