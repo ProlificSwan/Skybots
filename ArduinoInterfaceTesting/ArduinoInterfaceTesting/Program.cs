@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Solid.Arduino;
 using Solid.Arduino.Firmata;
 
-namespace ConsoleApp1
+namespace ArduinoInterfaceTesting
 
 {
     class Program
