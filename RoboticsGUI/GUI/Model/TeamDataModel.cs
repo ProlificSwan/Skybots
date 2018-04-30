@@ -35,5 +35,10 @@ namespace Robotics.GUI.Model
         public TeamScoringMethodModel TeamScoringMethod {
             get;
         } = new TeamScoringMethodModel();
+
+        public TeamSensorModel TeamSensorModel
+        {
+            get;
+        } = new TeamSensorModel();
     }
 }

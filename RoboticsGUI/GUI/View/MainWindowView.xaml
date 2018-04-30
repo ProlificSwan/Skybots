@@ -47,12 +47,14 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
@@ -67,6 +69,9 @@
         <Viewbox Grid.Row="1" Grid.Column="2" Margin="5" >
             <Label Content="Off" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Margin="5" >
+            <Label Content="Lights" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Viewbox>
         <Viewbox Grid.Row="2" Margin="5">
             <Label Content="Hover" Width="35" />
         </Viewbox>
@@ -78,7 +83,7 @@
         </Viewbox>
         <Button Grid.Row="2" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1HoverIncr, Mode=OneWay}" />
         <Button Grid.Row="2" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1HoverDecr, Mode=OneWay}" />
-
+        <CheckBox Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Hover.IsEnabled, Mode=OneWay}" />
         <Viewbox Grid.Row="3" Margin="5" >
             <Label Content="Plat 1" Width="35" />
         </Viewbox>
@@ -90,7 +95,7 @@
         </Viewbox>
         <Button Grid.Row="3" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat1Incr, Mode=OneWay}" />
         <Button Grid.Row="3" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat1Decr, Mode=OneWay}" />
-
+        <CheckBox Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Platform1.IsEnabled, Mode=OneWay}" />
         <Viewbox Grid.Row="4" Margin="5">
             <Label Content="Plat 2" Width="35" />
         </Viewbox>
@@ -102,7 +107,7 @@
         </Viewbox>
         <Button Grid.Row="4" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat2Incr, Mode=OneWay}" />
         <Button Grid.Row="4" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat2Decr, Mode=OneWay}" />
-
+        <CheckBox Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Platform2.IsEnabled, Mode=OneWay}" />
         <Viewbox Grid.Row="5" Margin="5" >
             <Label Content="Obs 1" Width="35" />
         </Viewbox>
@@ -114,7 +119,7 @@
         </Viewbox>
         <Button Grid.Row="5" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs1Incr, Mode=OneWay}" />
         <Button Grid.Row="5" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs1Decr, Mode=OneWay}" />
-
+        <CheckBox Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Obstacle2.IsEnabled, Mode=OneWay}" />
         <Viewbox Grid.Row="6" Margin="5">
             <Label Content="Obs 2" Width="35" />
         </Viewbox>
@@ -126,7 +131,7 @@
         </Viewbox>
         <Button Grid.Row="6" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs2Incr, Mode=OneWay}" />
         <Button Grid.Row="6" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs2Decr, Mode=OneWay}" />
-        
+        <CheckBox Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Obstacle2.IsEnabled, Mode=OneWay}"/>
         <Viewbox Grid.Row="8" Margin="5" >
             <Label Width="35" Content="Hover" />
         </Viewbox>
@@ -171,130 +176,133 @@
             <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team1.TeamScore.TotalScore, Mode=OneWay}" IsReadOnly="True" />
         </Viewbox>
 
-        <Rectangle Grid.RowSpan="{Binding RowDefinitions.Count, ElementName=grid, Mode=OneWay}" Grid.Column="5" Fill="AliceBlue" Width="1" Margin="10,0" />
+        <Rectangle Grid.RowSpan="{Binding RowDefinitions.Count, ElementName=grid, Mode=OneWay}" Grid.Column="6" Fill="AliceBlue" Width="1" Margin="10,0" />
 
-        <Viewbox Grid.Column="6" Grid.ColumnSpan="3">
+        <Viewbox Grid.Column="7" Grid.ColumnSpan="3">
             <Label Content="Time" />
         </Viewbox>
-        <Viewbox Grid.Row="1" Grid.RowSpan="2" Grid.Column="6" Grid.ColumnSpan="3" Margin="10,0">
+        <Viewbox Grid.Row="1" Grid.RowSpan="2" Grid.Column="7" Grid.ColumnSpan="3" Margin="10,0">
             <TextBox DataContext="{Binding Countdown}" Text="{Binding TimeRemaining, StringFormat=mm\\:ss\\:fff, Mode=OneWay}"  IsReadOnly="True"  />
         </Viewbox>
-        <Button Grid.Row="3" Grid.Column="6" Content="Start" Margin="7" Command="{Binding StartCommand}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        <Button Grid.Row="3" Grid.Column="7" Content="Stop" Margin="7" Command="{Binding StopCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Button Grid.Row="3" Grid.Column="8" Content="Reset" Margin="7" Command="{Binding ResetCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Button Grid.Row="3" Grid.Column="7" Content="Start" Margin="7" Command="{Binding StartCommand}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <Button Grid.Row="3" Grid.Column="8" Content="Stop" Margin="7" Command="{Binding StopCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Button Grid.Row="3" Grid.Column="9" Content="Reset" Margin="7" Command="{Binding ResetCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
 
-        <Rectangle Grid.RowSpan="{Binding RowDefinitions.Count, ElementName=grid, Mode=OneWay}" Grid.Column="9" Fill="AliceBlue" Width="1" Margin="10,0" />
+        <Rectangle Grid.RowSpan="{Binding RowDefinitions.Count, ElementName=grid, Mode=OneWay}" Grid.Column="10" Fill="AliceBlue" Width="1" Margin="10,0" />
         
-        <Viewbox Grid.Column="10" Grid.ColumnSpan="5" >
+        <Viewbox Grid.Column="11" Grid.ColumnSpan="5" >
             <Label Content="{Binding Team2.Name}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
         </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="11" Margin="5" >
+        <Viewbox Grid.Row="1" Grid.Column="12" Margin="5" >
             <Label Content="On" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="12" Margin="5" >
+        <Viewbox Grid.Row="1" Grid.Column="13" Margin="5" >
             <Label Content="Off" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="10" Margin="5">
-            <Label Content="Hover" Width="35" />
+        <Viewbox Grid.Row="1" Grid.Column="15" Grid.ColumnSpan="2" Margin="5" >
+            <Label Content="Lights" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Viewbox>
         <Viewbox Grid.Row="2" Grid.Column="11" Margin="5">
+            <Label Content="Hover" Width="35" />
+        </Viewbox>
+        <Viewbox Grid.Row="2" Grid.Column="12" Margin="5">
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2H" IsChecked="{Binding Team2.TeamScoringMethod.Hover.IsEnabled}" />
         </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="12" Margin="5" >
+        <Viewbox Grid.Row="2" Grid.Column="13" Margin="5" >
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2H" />
         </Viewbox>
-        <Button Grid.Row="2" Grid.Column="13" Content="+" Margin="7" Command="{Binding T2HoverIncr, Mode=OneWay}" />
-        <Button Grid.Row="2" Grid.Column="14" Content="-" Margin="7" Command="{Binding T2HoverDecr, Mode=OneWay}" />
-
-        <Viewbox Grid.Row="3" Grid.Column="10" Margin="5" >
+        <Button Grid.Row="2" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2HoverIncr, Mode=OneWay}" />
+        <Button Grid.Row="2" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2HoverDecr, Mode=OneWay}" />
+        <CheckBox Grid.Row="2" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Hover.IsEnabled, Mode=OneWay}" />
+        <Viewbox Grid.Row="3" Grid.Column="11" Margin="5" >
             <Label Content="Plat 1" Width="35" />
         </Viewbox>
-        <Viewbox Grid.Row="3" Grid.Column="11" Margin="5">
+        <Viewbox Grid.Row="3" Grid.Column="12" Margin="5">
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P1" IsChecked="{Binding Team2.TeamScoringMethod.Platform1.IsEnabled}" />
         </Viewbox>
-        <Viewbox Grid.Row="3" Grid.Column="12" Margin="5" >
+        <Viewbox Grid.Row="3" Grid.Column="13" Margin="5" >
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P1" />
         </Viewbox>
-        <Button Grid.Row="3" Grid.Column="13" Content="+" Margin="7" Command="{Binding T2Plat1Incr, Mode=OneWay}" />
-        <Button Grid.Row="3" Grid.Column="14" Content="-" Margin="7" Command="{Binding T2Plat1Decr, Mode=OneWay}" />
-
-        <Viewbox Grid.Row="4" Grid.Column="10" Margin="5">
+        <Button Grid.Row="3" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat1Incr, Mode=OneWay}" />
+        <Button Grid.Row="3" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat1Decr, Mode=OneWay}" />
+        <CheckBox Grid.Row="3" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Platform1.IsEnabled, Mode=OneWay}"/>
+        <Viewbox Grid.Row="4" Grid.Column="11" Margin="5">
             <Label Content="Plat 2" Width="35" />
         </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="11" Margin="5">
+        <Viewbox Grid.Row="4" Grid.Column="12" Margin="5">
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P2" IsChecked="{Binding Team2.TeamScoringMethod.Platform2.IsEnabled}" />
         </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="12" Margin="5" >
+        <Viewbox Grid.Row="4" Grid.Column="13" Margin="5" >
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P2" />
         </Viewbox>
-        <Button Grid.Row="4" Grid.Column="13" Content="+" Margin="7" Command="{Binding T2Plat2Incr, Mode=OneWay}" />
-        <Button Grid.Row="4" Grid.Column="14" Content="-" Margin="7" Command="{Binding T2Plat2Decr, Mode=OneWay}" />
-
-        <Viewbox Grid.Row="5" Grid.Column="10" Margin="5" >
+        <Button Grid.Row="4" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat2Incr, Mode=OneWay}" />
+        <Button Grid.Row="4" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat2Decr, Mode=OneWay}" />
+        <CheckBox Grid.Row="4" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Platform2.IsEnabled, Mode=OneWay}" />
+        <Viewbox Grid.Row="5" Grid.Column="11" Margin="5" >
             <Label Content="Obs 1" Width="35" />
         </Viewbox>
-        <Viewbox Grid.Row="5" Grid.Column="11" Margin="5">
+        <Viewbox Grid.Row="5" Grid.Column="12" Margin="5">
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O1" IsChecked="{Binding Team2.TeamScoringMethod.Obstacle1.IsEnabled}" />
         </Viewbox>
-        <Viewbox Grid.Row="5" Grid.Column="12" Margin="5" >
+        <Viewbox Grid.Row="5" Grid.Column="13" Margin="5" >
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O1" />
         </Viewbox>
-        <Button Grid.Row="5" Grid.Column="13" Content="+" Margin="7" Command="{Binding T2Obs1Incr, Mode=OneWay}" />
-        <Button Grid.Row="5" Grid.Column="14" Content="-" Margin="7" Command="{Binding T2Obs1Decr, Mode=OneWay}" />
-
-        <Viewbox Grid.Row="6" Grid.Column="10" Margin="5">
+        <Button Grid.Row="5" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs1Incr, Mode=OneWay}" />
+        <Button Grid.Row="5" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs1Decr, Mode=OneWay}" />
+        <CheckBox Grid.Row="5" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Obstacle1.IsEnabled, Mode=OneWay}" />
+        <Viewbox Grid.Row="6" Grid.Column="11" Margin="5">
             <Label Content="Obs 2" Width="35" />
         </Viewbox>
-        <Viewbox Grid.Row="6" Grid.Column="11" Margin="5" >
+        <Viewbox Grid.Row="6" Grid.Column="12" Margin="5" >
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O2" IsChecked="{Binding Team2.TeamScoringMethod.Obstacle2.IsEnabled}" />
         </Viewbox>
-        <Viewbox Grid.Row="6" Grid.Column="12" Margin="5" >
+        <Viewbox Grid.Row="6" Grid.Column="13" Margin="5" >
             <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O2" />
         </Viewbox>
-        <Button Grid.Row="6" Grid.Column="13" Content="+" Margin="7" Command="{Binding T2Obs2Incr, Mode=OneWay}" />
-        <Button Grid.Row="6" Grid.Column="14" Content="-" Margin="7" Command="{Binding T2Obs2Decr, Mode=OneWay}" />
-
-        <Viewbox Grid.Row="8" Grid.Column="10" Margin="5" >
+        <Button Grid.Row="6" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs2Incr, Mode=OneWay}" />
+        <Button Grid.Row="6" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs2Decr, Mode=OneWay}" />
+        <CheckBox Grid.Row="6" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Obstacle2.IsEnabled, Mode=OneWay}"/>
+        <Viewbox Grid.Row="8" Grid.Column="11" Margin="5" >
             <Label Width="35" Content="Hover" />
         </Viewbox>
-        <Viewbox Grid.Row="8" Grid.Column="11" Grid.ColumnSpan="4" Margin="0,1">
+        <Viewbox Grid.Row="8" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
             <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Hover.Score}" />
         </Viewbox>
 
-        <Viewbox Grid.Row="9" Grid.Column="10" Margin="5" >
+        <Viewbox Grid.Row="9" Grid.Column="11" Margin="5" >
             <Label Width="35" Content="Plat 1" />
         </Viewbox>
-        <Viewbox Grid.Row="9" Grid.Column="11" Grid.ColumnSpan="4" Margin="0,1">
+        <Viewbox Grid.Row="9" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
             <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Platform1.Score}" />
         </Viewbox>
 
-        <Viewbox Grid.Row="10" Grid.Column="10" Margin="5" >
+        <Viewbox Grid.Row="10" Grid.Column="11" Margin="5" >
             <Label Width="35" Content="Plat 2" />
         </Viewbox>
-        <Viewbox Grid.Row="10" Grid.Column="11" Grid.ColumnSpan="4" Margin="0,1">
+        <Viewbox Grid.Row="10" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
             <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Platform2.Score}" />
         </Viewbox>
 
-        <Viewbox Grid.Row="11" Grid.Column="10" Margin="5" >
+        <Viewbox Grid.Row="11" Grid.Column="11" Margin="5" >
             <Label Width="35" Content="Obs 1" />
         </Viewbox>
-        <Viewbox Grid.Row="11" Grid.Column="11" Grid.ColumnSpan="4" Margin="0,1" >
+        <Viewbox Grid.Row="11" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
             <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Obstacle1.Score}" />
         </Viewbox>
 
-        <Viewbox Grid.Row="12" Grid.Column="10" Margin="5" >
+        <Viewbox Grid.Row="12" Grid.Column="11" Margin="5" >
             <Label Width="35" Content="Obs 2" />
         </Viewbox>
-        <Viewbox Grid.Row="12" Grid.Column="11" Grid.ColumnSpan="4" Margin="0,1" >
+        <Viewbox Grid.Row="12" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
             <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Obstacle2.Score}" />
         </Viewbox>
 
-        <Rectangle Grid.Row="13" Grid.Column="11" Grid.ColumnSpan="4" Fill="AliceBlue" Height="1" Margin="0,5" />
+        <Rectangle Grid.Row="13" Grid.Column="12" Grid.ColumnSpan="4" Fill="AliceBlue" Height="1" Margin="0,5" />
 
-        <Viewbox Grid.Row="14" Grid.Column="10" Margin="5" >
+        <Viewbox Grid.Row="14" Grid.Column="11" Margin="5" >
             <Label Width="35" Content="Total" />
         </Viewbox>
-        <Viewbox Grid.Row="14" Grid.Column="11" Grid.ColumnSpan="4" Margin="0,1" >
+        <Viewbox Grid.Row="14" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
             <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.TotalScore, Mode=OneWay}" IsReadOnly="True" />
         </Viewbox>
     </Grid>

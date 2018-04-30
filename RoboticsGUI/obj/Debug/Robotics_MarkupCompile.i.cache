@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\betha\source\repos\RoboticsProject\RoboticsGUI\obj\Debug\
+C:\Users\betha\source\repos\Skybots\RoboticsGUI\obj\Debug\
 Robotics
 none
 false
 DEBUG;TRACE
-C:\Users\betha\source\repos\RoboticsProject\RoboticsGUI\App.xaml
+C:\Users\betha\source\repos\Skybots\RoboticsGUI\App.xaml
 8-25726703
 
-20-61664561
+22-1581002301
 131569487696
 GUI\Themes\BureauBlack.xaml;GUI\Themes\BureauBlue.xaml;GUI\Themes\ExpressionDark.xaml;GUI\Themes\ExpressionLight.xaml;GUI\Themes\ShinyBlue.xaml;GUI\Themes\ShinyRed.xaml;GUI\Themes\WhistlerBlue.xaml;GUI\View\MainWindowView.xaml;
 
-True
+False
 
