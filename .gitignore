@@ -1,3 +1,6 @@
-*/.vs
-*/Debug
+**/.vs
+**/Debug
+**/Release/*
 TODO.txt
+**/obj/*
+!**/Release/*.exe
