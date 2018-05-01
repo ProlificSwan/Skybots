@@ -80,11 +80,13 @@
     <Compile Include="GUI\Model\BaseModel.cs" />
     <Compile Include="GUI\Model\CountdownModel.cs" />
     <Compile Include="GUI\Model\ScoringMethod.cs" />
+    <Compile Include="GUI\Model\SensorModel.cs" />
     <Compile Include="GUI\Model\TeamScoringMethodModel.cs" />
     <Compile Include="GUI\Model\TeamScoreModel.cs" />
     <Compile Include="GUI\Model\ScoreModel.cs" />
     <Compile Include="GUI\Model\StopwatchModel.cs" />
     <Compile Include="GUI\Model\TeamDataModel.cs" />
+    <Compile Include="GUI\Model\TeamSensorModel.cs" />
     <Compile Include="GUI\ViewModel\BaseViewModel.cs" />
     <Compile Include="GUI\ViewModel\MainWindowViewModel.cs" />
     <Page Include="GUI\Themes\BureauBlack.xaml">
