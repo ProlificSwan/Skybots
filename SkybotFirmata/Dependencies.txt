@@ -1,0 +1,1 @@
+Note: this arduino file is based off of Firmata 2.5.8. If you attempt to build it with some other version of firmata active, you may have trouble.
