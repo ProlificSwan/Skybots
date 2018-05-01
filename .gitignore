@@ -1,4 +1,6 @@
-*/.vs
-*/Debug
-.vs/*
-RoboticsGUI/obj/*
+**/.vs
+**/Debug
+**/Release/*
+TODO.txt
+**/obj/*
+!**/Release/*.exe
