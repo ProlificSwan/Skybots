@@ -20,27 +20,36 @@ namespace Robotics.ArduinoControl
 
         static void Main()
         {
-            var session = new ArduinoSession(new EnhancedSerialConnection("COM3", SerialBaudRate.Bps_57600));
-            session.SetDigitalPinMode(13, PinMode.DigitalOutput);
-            // Create an AutoResetEvent to signal the timeout threshold in the
-            // timer callback has been reached.
-            //var autoEvent = new AutoResetEvent(false);
+            //need try catch here in case connection not available
+            ISerialConnection connection = EnhancedSerialConnection.Find();
+            
+            //ISerialConnection connection = new EnhancedSerialConnection("COM2", SerialBaudRate.Bps_57600);
+            if (connection != null)
+            {
+                var session = new ArduinoSession(connection);
+                session.SetDigitalPinMode(13, PinMode.DigitalOutput);
+                // Create an AutoResetEvent to signal the timeout threshold in the
+                // timer callback has been reached.
+                //var autoEvent = new AutoResetEvent(false);
 
-            var statusChecker = new StatusChecker(session);
+                var statusChecker = new StatusChecker(session);
 
-            // Create a timer that invokes CheckStatus after one second, 
-            // and every 1/4 second thereafter.
-            Console.WriteLine("{0:h:mm:ss.fff} Creating timer.\n",
-                              DateTime.Now);
-            var stateTimer = new Timer(statusChecker.CheckStatus,
-                                       null, 0, 500);
+                // Create a timer that invokes CheckStatus after one second, 
+                // and every 1/4 second thereafter.
+                Console.WriteLine("{0:h:mm:ss.fff} Creating timer.\n",
+                                  DateTime.Now);
+                var stateTimer = new Timer(statusChecker.CheckStatus,
+                                           null, 0, 500);
 
-            // When autoEvent signals, change the period to every half second.
-            //autoEvent.WaitOne();
-            //stateTimer.Change(0, 500);
-            //Console.WriteLine("\nChanging period to .5 seconds.\n");
-            //stateTimer.Dispose();
-            while (true);
+                // When autoEvent signals, change the period to every half second.
+                //autoEvent.WaitOne();
+                //stateTimer.Change(0, 500);
+                //Console.WriteLine("\nChanging period to .5 seconds.\n");
+                //stateTimer.Dispose();
+                Console.WriteLine("Press a key");
+                Console.ReadKey(true);
+            }
+            connection.Close();
         }
 
         

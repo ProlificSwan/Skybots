@@ -13,6 +13,7 @@ namespace Robotics.GUI.ViewModel
 
         RelayCommand _T1HoverScoreIncr = null;
         RelayCommand _T1HoverScoreDecr = null;
+        RelayCommand _T1HoverLed = null;
         RelayCommand _T1Plat1ScoreIncr = null;
         RelayCommand _T1Plat1ScoreDecr = null;
         RelayCommand _T1Plat2ScoreIncr = null;
@@ -38,9 +39,15 @@ namespace Robotics.GUI.ViewModel
         public TeamDataModel Team1 { get; } = new TeamDataModel("Team 1");
         public TeamDataModel Team2 { get; } = new TeamDataModel("Team 2");
 
+        //does this need to be public?
+        public ArduinoModel arduino = new ArduinoModel();        
+
         public RelayCommand StartCommand => _cmdStart ?? (_cmdStart = new RelayCommand(execute => Countdown.Start(), canExecute => { return !Countdown.IsRunning; }));
         public RelayCommand StopCommand => _cmdStop ?? (_cmdStop = new RelayCommand(execute => Countdown.Stop(), canExecute => { return Countdown.IsRunning; }));
         public RelayCommand ResetCommand => _cmdReset ?? (_cmdReset = new RelayCommand(execute => Countdown.Reset()));
+
+        //Led proof of concept
+        public RelayCommand T1HoverLed => _T1HoverLed ?? (_T1HoverLed = new RelayCommand(execute => { arduino.SetRedLed(Team1.TeamSensorModel.HoverLed.IsEnabled); }, canExecute => { return true; }));
 
         public RelayCommand T1HoverIncr => _T1HoverScoreIncr ?? (_T1HoverScoreIncr = new RelayCommand(execute => { Team1.TeamScore.Hover.Increment(); }, canExecute => { return !Team1.TeamScoringMethod.Hover.IsEnabled; }));
         public RelayCommand T1HoverDecr => _T1HoverScoreDecr ?? (_T1HoverScoreDecr = new RelayCommand(execute => { Team1.TeamScore.Hover.Decrement(); }, canExecute => { return !Team1.TeamScoringMethod.Hover.IsEnabled; }));
@@ -66,6 +73,7 @@ namespace Robotics.GUI.ViewModel
 
         public override void OnClosing(object sender, CancelEventArgs e)
         {
+            arduino.CloseConnection();
             Dispose();
         }
 

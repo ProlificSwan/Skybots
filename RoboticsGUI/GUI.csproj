@@ -82,6 +82,7 @@
     <Compile Include="ArduinoControl\SerialInterface.cs" />
     <Compile Include="GUI\Helpers\RelayCommand.cs" />
     <Compile Include="GUI\Model\BaseModel.cs" />
+    <Compile Include="GUI\Model\ArduinoModel.cs" />
     <Compile Include="GUI\Model\CountdownModel.cs" />
     <Compile Include="GUI\Model\ScoringMethod.cs" />
     <Compile Include="GUI\Model\SensorModel.cs" />
@@ -152,6 +153,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

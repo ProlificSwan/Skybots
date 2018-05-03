@@ -13,5 +13,6 @@ namespace Robotics.GUI.Model
         public SensorModel Platform2 { get; } = new SensorModel();
         public SensorModel Obstacle1 { get; } = new SensorModel();
         public SensorModel Obstacle2 { get; } = new SensorModel();
+        public SensorModel HoverLed { get; } = new SensorModel();
     }
 }
