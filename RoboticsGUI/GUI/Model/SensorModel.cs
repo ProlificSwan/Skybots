@@ -8,17 +8,17 @@ namespace Robotics.GUI.Model
 {
     class SensorModel:BaseModel
     {
-        private bool IsEnabled = false;
+        private bool _isEnabled = false;
 
-        public bool SensorStatus
+        public bool IsEnabled
         {
             get
             {
-                return IsEnabled;
+                return _isEnabled;
             }
             set
             {
-                SetProperty(ref IsEnabled, value);
+                SetProperty(ref _isEnabled, value);
             }
         }
 

@@ -56,6 +56,9 @@
     <StartupObject>Robotics.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Solid.Arduino, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SolidSoils.Arduino.Client.0.4.0\lib\net45\Solid.Arduino.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -76,8 +79,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ArduinoControl\SerialInterface.cs" />
     <Compile Include="GUI\Helpers\RelayCommand.cs" />
     <Compile Include="GUI\Model\BaseModel.cs" />
+    <Compile Include="GUI\Model\ArduinoModel.cs" />
+    <Compile Include="GUI\Model\MotorModel.cs" />
+    <Compile Include="GUI\Model\TeamControlModel.cs" />
+    <Compile Include="GUI\Model\LedModel.cs" />
     <Compile Include="GUI\Model\CountdownModel.cs" />
     <Compile Include="GUI\Model\ScoringMethod.cs" />
     <Compile Include="GUI\Model\SensorModel.cs" />
@@ -148,6 +156,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

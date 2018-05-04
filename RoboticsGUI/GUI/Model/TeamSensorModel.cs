@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Robotics.GUI.Model
 {
+    //GROWTH - Available for use when automated scoring is implemented.
     class TeamSensorModel:BaseModel
     {
         public SensorModel Hover { get; } = new SensorModel();
