@@ -83,7 +83,7 @@
         </Viewbox>
         <Button Grid.Row="2" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1HoverIncr, Mode=OneWay}" />
         <Button Grid.Row="2" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1HoverDecr, Mode=OneWay}" />
-        <CheckBox Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamSensorModel.HoverLed.IsEnabled}" Command="{Binding T1HoverLed, Mode=OneWay}" />
+        <CheckBox Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControlModel.HoverLed.Value}" Command="{Binding T1HoverLed, Mode=OneWay}" />
         <Viewbox Grid.Row="3" Margin="5" >
             <Label Content="Plat 1" Width="35" />
         </Viewbox>
@@ -95,7 +95,7 @@
         </Viewbox>
         <Button Grid.Row="3" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat1Incr, Mode=OneWay}" />
         <Button Grid.Row="3" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Platform1.IsEnabled, Mode=OneWay}" />
+        <CheckBox Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControlModel.Platform1Led.Value}" Command="{Binding T1Plat1Led, Mode=OneWay}" />
         <Viewbox Grid.Row="4" Margin="5">
             <Label Content="Plat 2" Width="35" />
         </Viewbox>
@@ -107,7 +107,7 @@
         </Viewbox>
         <Button Grid.Row="4" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat2Incr, Mode=OneWay}" />
         <Button Grid.Row="4" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Platform2.IsEnabled, Mode=OneWay}" />
+        <CheckBox Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControlModel.Platform2Led.Value}" Command="{Binding T1Plat2Led, Mode=OneWay}" />
         <Viewbox Grid.Row="5" Margin="5" >
             <Label Content="Obs 1" Width="35" />
         </Viewbox>
@@ -119,7 +119,7 @@
         </Viewbox>
         <Button Grid.Row="5" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs1Incr, Mode=OneWay}" />
         <Button Grid.Row="5" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Obstacle2.IsEnabled, Mode=OneWay}" />
+        <CheckBox Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControlModel.Obstacle1Led.Value}" Command="{Binding T1Obs1Led, Mode=OneWay}" />
         <Viewbox Grid.Row="6" Margin="5">
             <Label Content="Obs 2" Width="35" />
         </Viewbox>
@@ -131,7 +131,7 @@
         </Viewbox>
         <Button Grid.Row="6" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs2Incr, Mode=OneWay}" />
         <Button Grid.Row="6" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Obstacle2.IsEnabled, Mode=OneWay}"/>
+        <CheckBox Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControlModel.Obstacle2Led.Value}" Command="{Binding T1Obs2Led, Mode=OneWay}"/>
         <Viewbox Grid.Row="8" Margin="5" >
             <Label Width="35" Content="Hover" />
         </Viewbox>
@@ -213,7 +213,7 @@
         </Viewbox>
         <Button Grid.Row="2" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2HoverIncr, Mode=OneWay}" />
         <Button Grid.Row="2" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2HoverDecr, Mode=OneWay}" />
-        <CheckBox Grid.Row="2" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamSensorModel.HoverLed.IsEnabled}" />
+        <CheckBox Grid.Row="2" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControlModel.HoverLed.Value}" Command="{Binding T2HoverLed, Mode=OneWay}"/>
         <Viewbox Grid.Row="3" Grid.Column="11" Margin="5" >
             <Label Content="Plat 1" Width="35" />
         </Viewbox>
@@ -225,7 +225,7 @@
         </Viewbox>
         <Button Grid.Row="3" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat1Incr, Mode=OneWay}" />
         <Button Grid.Row="3" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="3" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Platform1.IsEnabled, Mode=OneWay}"/>
+        <CheckBox Grid.Row="3" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControlModel.Platform1Led.Value}" Command="{Binding T2Plat1Led, Mode=OneWay}"/>
         <Viewbox Grid.Row="4" Grid.Column="11" Margin="5">
             <Label Content="Plat 2" Width="35" />
         </Viewbox>
@@ -237,7 +237,7 @@
         </Viewbox>
         <Button Grid.Row="4" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat2Incr, Mode=OneWay}" />
         <Button Grid.Row="4" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="4" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Platform2.IsEnabled, Mode=OneWay}" />
+        <CheckBox Grid.Row="4" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControlModel.Platform2Led.Value}" Command="{Binding T2Plat2Led, Mode=OneWay}" />
         <Viewbox Grid.Row="5" Grid.Column="11" Margin="5" >
             <Label Content="Obs 1" Width="35" />
         </Viewbox>
@@ -249,7 +249,7 @@
         </Viewbox>
         <Button Grid.Row="5" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs1Incr, Mode=OneWay}" />
         <Button Grid.Row="5" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="5" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Obstacle1.IsEnabled, Mode=OneWay}" />
+        <CheckBox Grid.Row="5" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControlModel.Obstacle1Led.Value}" Command="{Binding T2Obs1Led, Mode=OneWay}" />
         <Viewbox Grid.Row="6" Grid.Column="11" Margin="5">
             <Label Content="Obs 2" Width="35" />
         </Viewbox>
@@ -261,7 +261,7 @@
         </Viewbox>
         <Button Grid.Row="6" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs2Incr, Mode=OneWay}" />
         <Button Grid.Row="6" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="6" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Team1.TeamSensorModel.Obstacle2.IsEnabled, Mode=OneWay}"/>
+        <CheckBox Grid.Row="6" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControlModel.Obstacle2Led.Value}" Command="{Binding T2Obs2Led, Mode=OneWay}"/>
         <Viewbox Grid.Row="8" Grid.Column="11" Margin="5" >
             <Label Width="35" Content="Hover" />
         </Viewbox>

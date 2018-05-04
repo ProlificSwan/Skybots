@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Solid.Arduino;
 using Solid.Arduino.Firmata;
 
@@ -13,7 +14,11 @@ namespace Robotics.GUI.Model
         private ArduinoSession _session;
         private ISerialConnection _connection;
         private bool _comOK = true;
-        private Led RedLed = new Led(13);
+        //private LedModel RedLed = new LedModel(12);
+        private Timer _keepAliveTimer;
+        private const int _keepAliveInterval = 500; //in msec
+        private LedModel _keepAliveLed = new LedModel(13); //pin 13 is a built-in Arduino pin.
+
 
         public ArduinoModel()
         {
@@ -24,27 +29,81 @@ namespace Robotics.GUI.Model
             if (_comOK)
             {
                 _session = new ArduinoSession(_connection);
+                _keepAliveTimer = new Timer(_keepAliveInterval);
+                _keepAliveTimer.AutoReset = true;
+                _keepAliveTimer.Elapsed += _keepAliveTimer_Elapsed;
+                _keepAliveTimer.Start();
             }
         }
 
-        public void SetRedLed(bool value)
+        private void _keepAliveTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            if (_comOK)
+            ToggleLed(_keepAliveLed);
+        }
+
+        public bool ComOK
+        {
+            get
             {
-                RedLed.value = value;
-                _session.SetDigitalPin(RedLed.pinNumber, RedLed.value);
+                return _comOK;
             }
         }
 
-        public bool GetRedLed()
+        //Commands Arduino to toggle pin state
+        public void ToggleLed(LedModel led)
         {
-            return RedLed.value;
+            if (_comOK && led.PinNumber >= 0)
+            {
+                led.Value = !led.Value;
+                _session.SetDigitalPin(led.PinNumber, led.Value);
+            }
+        }
+
+        //Commands LedModel and Arduino to change physical led state to specified value.
+        //Returns either commanded state confirmation or false if communication is bad.
+        public bool SetLed(LedModel led, bool value)
+        {
+            if (_comOK && led.PinNumber >= 0)
+            {
+                led.Value = value;
+                _session.SetDigitalPin(led.PinNumber, led.Value);
+            }
+            return (_comOK && led.Value);
+        }
+
+        //Commands Arduino to change physical led state to specified value.
+        //Returns either commanded state confirmation or false if communication is bad.
+        public bool SetLed(LedModel led)
+        {
+            if (_comOK && led.PinNumber >= 0)
+            {
+                _session.SetDigitalPin(led.PinNumber, led.Value);
+            }
+            return (_comOK && led.Value);
+        }
+
+        //Commands Arduino to change physical motor state to match current motor state values.
+        //Returns false if communication or motor pins are bad.
+        public bool SetMotor(MotorModel motor)
+        {
+            if (_comOK && motor.PinNumber1 >= 0 && motor.PinNumber2 >= 0)
+            {
+                _session.SetDigitalPin(motor.PinNumber1, motor.In1);
+                _session.SetDigitalPin(motor.PinNumber2, motor.In2);
+            }
+            else
+            {
+                return false;
+            }
+            return true;
         }
 
         public void CloseConnection()
         {
             if (_connection != null)
             {
+                _keepAliveTimer.Stop();
+                _comOK = false;
                 _connection.Close();
             }
         }
@@ -71,13 +130,39 @@ namespace Robotics.GUI.Model
             }
         }
 
+        /*//For setting the connection manually.
+        //Example: setExactConnection("COM2", SerialBaudRate.Bps_57600);
+        private void SetExactConnection(string COM_Port, SerialBaudRate baudRate)
+        {
+            CloseConnection(); //close any existing connection
 
+            try
+            {
+                _connection = new EnhancedSerialConnection(COM_Port, baudRate);
+                if (_connection == null)
+                {
+                    _comOK = false;
+                }
+                else
+                {
+                    _comOK = true;
+                }
 
-        private void Reconnect()
+            }
+            catch
+            {
+                _comOK = false;
+                _connection.Close();
+            }
+        }*/
+
+        public void Reconnect()
         {
             if (_comOK)
             {
+                _keepAliveTimer.Stop();
                 _session.Clear();
+                _keepAliveTimer.Start();
             }
             else
             {
@@ -85,54 +170,14 @@ namespace Robotics.GUI.Model
                 if (_comOK)
                 {
                     _session = new ArduinoSession(_connection);
+                    _keepAliveTimer.Start();
                 }
             }
         }
 
-        private void Reset()
+        public void Reset()
         {
             _session.ResetBoard();
-        }
-    }
-
-    //Stores LED state and Arduino pin number
-    class Led
-    {
-        public Int16 pinNumber;
-        public bool value;
-
-        public Led()
-        {
-            this.pinNumber = -1;
-            this.value = false;
-        }
-
-        public Led(short pinNumber, bool value)
-        {
-            this.pinNumber = pinNumber;
-            this.value = value;
-        }
-
-        public Led(short pinNumber)
-        {
-            this.pinNumber = pinNumber;
-            this.value = false;
-        }
-
-        public override bool Equals(object obj)
-        {
-            var led = obj as Led;
-            return led != null &&
-                   pinNumber == led.pinNumber &&
-                   value == led.value;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = 1549015223;
-            hashCode = hashCode * -1521134295 + pinNumber.GetHashCode();
-            hashCode = hashCode * -1521134295 + value.GetHashCode();
-            return hashCode;
         }
     }
 }

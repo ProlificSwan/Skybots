@@ -83,6 +83,9 @@
     <Compile Include="GUI\Helpers\RelayCommand.cs" />
     <Compile Include="GUI\Model\BaseModel.cs" />
     <Compile Include="GUI\Model\ArduinoModel.cs" />
+    <Compile Include="GUI\Model\MotorModel.cs" />
+    <Compile Include="GUI\Model\TeamControlModel.cs" />
+    <Compile Include="GUI\Model\LedModel.cs" />
     <Compile Include="GUI\Model\CountdownModel.cs" />
     <Compile Include="GUI\Model\ScoringMethod.cs" />
     <Compile Include="GUI\Model\SensorModel.cs" />
