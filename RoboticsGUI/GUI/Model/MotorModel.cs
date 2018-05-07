@@ -17,10 +17,19 @@ namespace Robotics.GUI.Model
         private bool _lastIn2;
 
         //TODO - supply arduino with event for changes to in1 and in2?
+        //TODO setup timed motor movement that works in concert with game timer
+
+        //Stops motors.
+        //TODO impelement rolling stop so that initial starting position is returned to when this is called
+        public void Stop()
+        {
+            _in1 = false;
+            _in2 = false;
+        }
 
         //Sets aside current motor values and sets motor state to stopped (still need arduino to update)
         //Intended for use in concert with Continue()
-        public void Stop()
+        public void Pause()
         {
             _lastIn1 = _in1;
             _lastIn2 = _in2;
@@ -41,7 +50,7 @@ namespace Robotics.GUI.Model
         }
 
         //Retreives past motor values to continue motor movement in direction was moving before pause.
-        //Intended for use in concert with Stop()
+        //Intended for use in concert with Pause()
         public void Continue()
         {
             _in1 = _lastIn1;

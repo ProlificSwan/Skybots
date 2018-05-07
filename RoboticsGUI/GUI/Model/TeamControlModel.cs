@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Robotics.GUI.Model
 {
-    //Defines all controllable elements on the field along with their control pin numbers
-    //TODO implement MotorModel
+    //Defines all controllable elements on a team's side of the field along with their control pin numbers
     class TeamControlModel : BaseModel
     {
         public TeamControlModel(Int16 plat1, Int16 plat2, Int16 obs1, Int16 obs2, Int16 hover, Int16 start, Int16 motor1, Int16 motor2)

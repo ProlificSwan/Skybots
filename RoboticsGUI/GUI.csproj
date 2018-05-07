@@ -79,10 +79,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ArduinoControl\SerialInterface.cs" />
     <Compile Include="GUI\Helpers\RelayCommand.cs" />
     <Compile Include="GUI\Model\BaseModel.cs" />
     <Compile Include="GUI\Model\ArduinoModel.cs" />
+    <Compile Include="GUI\Model\TeamGameModel.cs" />
     <Compile Include="GUI\Model\MotorModel.cs" />
     <Compile Include="GUI\Model\TeamControlModel.cs" />
     <Compile Include="GUI\Model\LedModel.cs" />
@@ -166,7 +166,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Control\" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>

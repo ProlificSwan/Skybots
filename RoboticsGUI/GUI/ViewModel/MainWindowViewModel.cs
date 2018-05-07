@@ -71,12 +71,12 @@ namespace Robotics.GUI.ViewModel
         public RelayCommand T1Obs2Incr => _T1Obs2ScoreIncr ?? (_T1Obs2ScoreIncr = new RelayCommand(execute => { Team1.TeamScore.Obstacle2.Increment(); }, canExecute => { return !Team1.TeamScoringMethod.Obstacle2.IsEnabled; }));
         public RelayCommand T1Obs2Decr => _T1Obs2ScoreDecr ?? (_T1Obs2ScoreDecr = new RelayCommand(execute => { Team1.TeamScore.Obstacle2.Decrement(); }, canExecute => { return !Team1.TeamScoringMethod.Obstacle2.IsEnabled; }));
         //T1 LED and motor control
-        public RelayCommand T1HoverLed => _T1HoverLed ?? (_T1HoverLed = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControlModel.HoverLed); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T1Plat1Led => _T1Plat1Led ?? (_T1Plat1Led = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControlModel.Platform1Led); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T1Plat2Led => _T1Plat2Led ?? (_T1Plat1Led = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControlModel.Platform2Led); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T1Obs1Led => _T1Obs1Led ?? (_T1Obs1Led = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControlModel.Obstacle1Led); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T1Obs2Led => _T1Obs2Led ?? (_T1Obs1Led = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControlModel.Obstacle2Led); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T1StartLed => _T1StartLed ?? (_T1StartLed = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControlModel.StartLed); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T1HoverLed => _T1HoverLed ?? (_T1HoverLed = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControl.HoverLed); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T1Plat1Led => _T1Plat1Led ?? (_T1Plat1Led = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControl.Platform1Led); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T1Plat2Led => _T1Plat2Led ?? (_T1Plat1Led = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControl.Platform2Led); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T1Obs1Led => _T1Obs1Led ?? (_T1Obs1Led = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControl.Obstacle1Led); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T1Obs2Led => _T1Obs2Led ?? (_T1Obs1Led = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControl.Obstacle2Led); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T1StartLed => _T1StartLed ?? (_T1StartLed = new RelayCommand(execute => { arduino.SetLed(Team1.TeamControl.StartLed); }, canExecute => { return arduino.ComOK; }));
 
         //T2 score and sensor control
         public RelayCommand T2HoverIncr => _T2HoverScoreIncr ?? (_T2HoverScoreIncr = new RelayCommand(execute => { Team2.TeamScore.Hover.Increment(); }, canExecute => { return !Team2.TeamScoringMethod.Hover.IsEnabled; }));
@@ -90,12 +90,12 @@ namespace Robotics.GUI.ViewModel
         public RelayCommand T2Obs2Incr => _T2Obs2ScoreIncr ?? (_T2Obs2ScoreIncr = new RelayCommand(execute => { Team2.TeamScore.Obstacle2.Increment(); }, canExecute => { return !Team2.TeamScoringMethod.Obstacle2.IsEnabled; }));
         public RelayCommand T2Obs2Decr => _T2Obs2ScoreDecr ?? (_T2Obs2ScoreDecr = new RelayCommand(execute => { Team2.TeamScore.Obstacle2.Decrement(); }, canExecute => { return !Team2.TeamScoringMethod.Obstacle2.IsEnabled; }));
         //T2 LED and motor control
-        public RelayCommand T2HoverLed => _T2HoverLed ?? (_T2HoverLed = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControlModel.HoverLed); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T2Plat1Led => _T2Plat1Led ?? (_T2Plat1Led = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControlModel.Platform1Led); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T2Plat2Led => _T2Plat2Led ?? (_T2Plat1Led = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControlModel.Platform2Led); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T2Obs1Led => _T2Obs1Led ?? (_T2Obs1Led = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControlModel.Obstacle1Led); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T2Obs2Led => _T2Obs2Led ?? (_T2Obs1Led = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControlModel.Obstacle2Led); }, canExecute => { return arduino.ComOK; }));
-        public RelayCommand T2StartLed => _T2StartLed ?? (_T2StartLed = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControlModel.StartLed); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T2HoverLed => _T2HoverLed ?? (_T2HoverLed = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControl.HoverLed); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T2Plat1Led => _T2Plat1Led ?? (_T2Plat1Led = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControl.Platform1Led); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T2Plat2Led => _T2Plat2Led ?? (_T2Plat1Led = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControl.Platform2Led); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T2Obs1Led => _T2Obs1Led ?? (_T2Obs1Led = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControl.Obstacle1Led); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T2Obs2Led => _T2Obs2Led ?? (_T2Obs1Led = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControl.Obstacle2Led); }, canExecute => { return arduino.ComOK; }));
+        public RelayCommand T2StartLed => _T2StartLed ?? (_T2StartLed = new RelayCommand(execute => { arduino.SetLed(Team2.TeamControl.StartLed); }, canExecute => { return arduino.ComOK; }));
 
         public override void OnClosing(object sender, CancelEventArgs e)
         {

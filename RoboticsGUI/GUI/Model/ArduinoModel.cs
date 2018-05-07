@@ -24,7 +24,6 @@ namespace Robotics.GUI.Model
         {
             //ISerialConnection connection = GetConnection();
 
-            //TODO - implement proper exception or handling for when connection not found.
             SetConnection();
             if (_comOK)
             {
@@ -49,12 +48,15 @@ namespace Robotics.GUI.Model
             }
         }
 
+        //TODO add method of creating sensor listener objects for SensorModel or ScoreModel objects to consume for score updated by sensor
+
         //Commands Arduino to toggle pin state
         public void ToggleLed(LedModel led)
         {
             if (_comOK && led.PinNumber >= 0)
             {
                 led.Value = !led.Value;
+                //TODO add exception handling for random unplugs of serial (so user cannot crash program by unplugging arduino)
                 _session.SetDigitalPin(led.PinNumber, led.Value);
             }
         }
