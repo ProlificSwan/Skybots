@@ -11,13 +11,15 @@ namespace Robotics.GUI.Model
         public TeamDataModel(string name = "Team")
         {
             name = _name;
-            TeamControlModel = new TeamControlModel(-1, -1, -1, -1, -1, -1, -1, -1);
+            TeamControl = new TeamControlModel(-1, -1, -1, -1, -1, -1, -1, -1);
+            _teamGame = new TeamGameModel(TeamScore, TeamControl);
         }
 
         public TeamDataModel(string name, Int16 plat1, Int16 plat2, Int16 obs1, Int16 obs2, Int16 hover, Int16 start, Int16 motor1, Int16 motor2)
         {
             name = _name;
-            TeamControlModel = new TeamControlModel(plat1, plat2, obs1, obs2, hover, start,motor1, motor2);
+            TeamControl = new TeamControlModel(plat1, plat2, obs1, obs2, hover, start,motor1, motor2);
+            _teamGame = new TeamGameModel(TeamScore, TeamControl);
         }
 
         private string _name = "Team";
@@ -48,6 +50,7 @@ namespace Robotics.GUI.Model
             get;
         } = new TeamSensorModel();
 
-        public TeamControlModel TeamControlModel { get; }
+        public TeamControlModel TeamControl { get; }
+        private TeamGameModel _teamGame;
     }
 }
