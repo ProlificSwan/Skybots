@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Timers;
 using Solid.Arduino;
@@ -9,7 +10,7 @@ using Solid.Arduino.Firmata;
 
 namespace Robotics.GUI.Model
 {
-    public class ArduinoModel: BaseModel
+    class ArduinoModel: BaseModel
     {
         private ArduinoSession _session;
         private ISerialConnection _connection;
@@ -18,9 +19,10 @@ namespace Robotics.GUI.Model
         private Timer _keepAliveTimer;
         private const int _keepAliveInterval = 500; //in msec
         private LedModel _keepAliveLed = new LedModel(13); //pin 13 is a built-in Arduino pin.
+        private TeamDataModel _teamData1;
+        private TeamDataModel _teamData2;
 
-
-        public ArduinoModel()
+        public ArduinoModel(TeamDataModel teamData1, TeamDataModel teamData2)
         {
             //ISerialConnection connection = GetConnection();
 
@@ -33,6 +35,38 @@ namespace Robotics.GUI.Model
                 _keepAliveTimer.Elapsed += _keepAliveTimer_Elapsed;
                 _keepAliveTimer.Start();
             }
+
+            //Subscribe to controllable data changes
+            //Planned: publish sensor updates using TeamSensor object in teamData
+            _teamData1 = teamData1;          
+            _teamData1.TeamControl.HoverLed.PropertyChanged += OnLedChanged;
+            _teamData1.TeamControl.Obstacle1Led.PropertyChanged += OnLedChanged;
+            _teamData1.TeamControl.Obstacle2Led.PropertyChanged += OnLedChanged;
+            _teamData1.TeamControl.Platform1Led.PropertyChanged += OnLedChanged;
+            _teamData1.TeamControl.Platform2Led.PropertyChanged += OnLedChanged;
+            _teamData1.TeamControl.StartLed.PropertyChanged += OnLedChanged;
+            _teamData1.TeamControl.Motor.PropertyChanged += OnMotorChanged;
+
+            _teamData2 = teamData2;
+            _teamData2.TeamControl.HoverLed.PropertyChanged += OnLedChanged;
+            _teamData2.TeamControl.Obstacle1Led.PropertyChanged += OnLedChanged;
+            _teamData2.TeamControl.Obstacle2Led.PropertyChanged += OnLedChanged;
+            _teamData2.TeamControl.Platform1Led.PropertyChanged += OnLedChanged;
+            _teamData2.TeamControl.Platform2Led.PropertyChanged += OnLedChanged;
+            _teamData2.TeamControl.StartLed.PropertyChanged += OnLedChanged;
+            _teamData2.TeamControl.Motor.PropertyChanged += OnMotorChanged;
+        }
+
+        private void OnLedChanged(object sender, PropertyChangedEventArgs e)
+        {
+            LedModel led = (LedModel)sender;
+            SetLed(led);
+        }
+
+        private void OnMotorChanged(object sender, PropertyChangedEventArgs e)
+        {
+            MotorModel motor = (MotorModel)sender;
+            SetMotor(motor);
         }
 
         private void _keepAliveTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -48,8 +82,6 @@ namespace Robotics.GUI.Model
             }
         }
 
-        //TODO add method of creating sensor listener objects for SensorModel or ScoreModel objects to consume for score updated by sensor
-
         //Commands Arduino to toggle pin state
         public void ToggleLed(LedModel led)
         {
@@ -61,7 +93,7 @@ namespace Robotics.GUI.Model
             }
         }
 
-        //Commands LedModel and Arduino to change physical led state to specified value.
+        //Forces LedModel and Arduino to change physical led state to specified value.
         //Returns either commanded state confirmation or false if communication is bad.
         public bool SetLed(LedModel led, bool value)
         {
