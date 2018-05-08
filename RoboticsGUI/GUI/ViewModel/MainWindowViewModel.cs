@@ -44,9 +44,10 @@ namespace Robotics.GUI.ViewModel
          * instantiated in order. That said, there's no reason to have multiple MainWindows right now, so this distinction is currently 
          * not important. Static works as is right now because the static objects are created in order of declaration (non-static fields may be created in any order).
          */
-        //TODO - should probably get LED pin numbers from some standard constants class or enum instead of hardcoding here.
-        public static TeamDataModel Team1 { get; } = new TeamDataModel("Team 1", 22, 24,26,28,30,32,2,3); //assumption: this is the red team
-        public static TeamDataModel Team2 { get; } = new TeamDataModel("Team 2",23,25,27,29,31,33,4,5); //assumption: this is the blue team
+        public static TeamDataModel Team1 { get; } = new TeamDataModel("Team 1", Constants.rplat1, Constants.rplat2,Constants.robs1,Constants.robs2,Constants.rhover,
+                                                                       Constants.rstart,Constants.rmotor1,Constants.rmotor2); //assumption: this is the red team
+        public static TeamDataModel Team2 { get; } = new TeamDataModel("Team 2", Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
+                                                                       Constants.bstart, Constants.bmotor1, Constants.bmotor2); //assumption: this is the blue team
         //TODO Research: does this need to be public?
         public static ArduinoModel arduino = new ArduinoModel(Team1,Team2);        
 
