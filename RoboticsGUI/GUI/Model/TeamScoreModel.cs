@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Robotics.GUI.Helpers;
 
 namespace Robotics.GUI.Model
 {
@@ -20,11 +21,11 @@ namespace Robotics.GUI.Model
 
         private void OnScoreChanged(object sender, PropertyChangedEventArgs e) => OnPropertyChanged(nameof(TotalScore));
 
-        public ScoreModel Hover { get; } = new ScoreModel();
-        public ScoreModel Platform1 { get; } = new ScoreModel();
-        public ScoreModel Platform2 { get; } = new ScoreModel();
-        public ScoreModel Obstacle1 { get; } = new ScoreModel();
-        public ScoreModel Obstacle2 { get; } = new ScoreModel();
+        public ScoreModel Hover { get; } = new ScoreModel(Constants.hoverInc);
+        public ScoreModel Platform1 { get; } = new ScoreModel(Constants.platInc);
+        public ScoreModel Platform2 { get; } = new ScoreModel(Constants.platInc);
+        public ScoreModel Obstacle1 { get; } = new ScoreModel(Constants.obs1Inc); //Moving Obstacle
+        public ScoreModel Obstacle2 { get; } = new ScoreModel(Constants.obs2Inc); //Fixed Obstacle
 
         public uint TotalScore => Hover.Score + Platform1.Score + Platform2.Score + Obstacle1.Score + Obstacle2.Score;
     }

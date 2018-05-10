@@ -10,6 +10,14 @@ namespace Robotics.GUI.Model
     {
         public uint _score = 0;
 
+        private uint _scoreDelta;
+
+        public ScoreModel(uint scoreIncrement)
+        {
+            _scoreDelta = scoreIncrement;
+        }
+
+
         /// <value>Gets the current score.</value>
         public uint Score
         {
@@ -25,13 +33,13 @@ namespace Robotics.GUI.Model
 
         public uint Increment()
         {
-            Score++;
+            Score+= _scoreDelta;
             return Score;
         }
 
         public uint Decrement()
         {
-            if (Score != 0) Score--;
+            if (Score != 0) Score-= _scoreDelta;
             return Score;
         }
 

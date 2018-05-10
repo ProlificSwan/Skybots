@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,15 +9,23 @@ namespace Robotics.GUI.Model
 {
     class TeamGameModel : BaseModel
     {
-        public TeamGameModel(TeamScoreModel teamScore, TeamControlModel teamControl)
+        public TeamGameModel(TeamScoreModel teamScore, TeamControlModel teamControl, CountdownModel countdown)
         {
             _teamScore = teamScore;
             _teamControl = teamControl;
-            //TODO add stopwatch listening event or reference
+
+            //time event setup
+            _countdown = countdown;
+            startLeft = countdown.Timeout.TotalMilliseconds - startTime;
+            hoverLeft = countdown.Timeout.TotalMilliseconds - hoverTime;
+            obstacleLeft = countdown.Timeout.TotalMilliseconds - obstacleTime;
+            platformLeft = countdown.Timeout.TotalMilliseconds - platformTime;
+            _countdown.PropertyChanged += OnTimeChange;
         }
 
         private TeamScoreModel _teamScore;
         private TeamControlModel _teamControl;
+        private CountdownModel _countdown;
 
         public enum gameState
         {
@@ -40,18 +49,24 @@ namespace Robotics.GUI.Model
             }
         }
         //TODO - make times configurable
+
         private const int startTime = 5000; //start time in msecs
         private const int hoverTime = 30000; //hover time in total elapsed msecs before absolute end
         private const int obstacleTime = 105000; //obstacle time in total elapsed msecs before absolute end
         private const int platformTime = 150000; //platform time
+        //Time left after above times have elapsed
+        private double startLeft;
+        private double hoverLeft;
+        private double obstacleLeft;
+        private double platformLeft;
 
-        //TODO ATTACH THIS TO ACTUAL EVENT, loop, or callback
-        private void OnTimeElapsed(int time)
+        private void OnTimeChange(object sender, PropertyChangedEventArgs e)
         {
+            double timeLeft = _countdown.TimeRemaining.TotalMilliseconds;
             switch (_state)
             {
                 case gameState.Idle:
-                    if (time > 0 && time < hoverTime)
+                    if (timeLeft > 0 && timeLeft < _countdown.Timeout.TotalMilliseconds)
                     {
                         _state = gameState.StartHover;
                         _teamControl.StartLed.Value = true;
@@ -59,7 +74,7 @@ namespace Robotics.GUI.Model
                     }
                     break;
                 case gameState.StartHover:
-                    if (time > startTime)
+                    if (timeLeft <= startLeft)
                     {
                         _state = gameState.Hover;
                         _teamControl.StartLed.Value = false;
@@ -75,7 +90,7 @@ namespace Robotics.GUI.Model
                     }
                     break;
                 case gameState.Hover:
-                    if (_teamScore.Hover.Score > 0 || time > hoverTime)
+                    if (_teamScore.Hover.Score > 0 || timeLeft <= hoverLeft)
                     {
                         _state = gameState.Obstacles;
                         _teamControl.HoverLed.Value = false;
@@ -85,7 +100,7 @@ namespace Robotics.GUI.Model
                     }
                     break;
                 case gameState.Obstacles:
-                    if (time > obstacleTime)
+                    if (timeLeft <= obstacleLeft)
                     {
                         _state = gameState.Platforms;
                         _teamControl.Obstacle1Led.Value = false;
@@ -96,7 +111,7 @@ namespace Robotics.GUI.Model
                     }
                     break;
                 case gameState.Platforms:
-                    if (time > platformTime || (_teamScore.Platform1.Score > 0 && _teamScore.Platform2.Score > 0))
+                    if (timeLeft <= platformLeft || (_teamScore.Platform1.Score > 0 && _teamScore.Platform2.Score > 0))
                     {
                         _state = gameState.Idle;
                         FinishGame();
@@ -112,6 +127,11 @@ namespace Robotics.GUI.Model
             _teamControl.Platform1Led.Value = false;
             _teamControl.Platform2Led.Value = false;
             //do something special?
+        }
+
+        public void Reset()
+        {
+            _state = gameState.Idle;
         }
 
     }

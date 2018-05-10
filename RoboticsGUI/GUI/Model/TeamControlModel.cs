@@ -27,5 +27,16 @@ namespace Robotics.GUI.Model
         public MotorModel Motor { get; }
         public LedModel HoverLed { get; }
         public LedModel StartLed { get; }
+
+        public void Reset()
+        {
+            Platform1Led.Value = false;
+            Platform2Led.Value = false;
+            Obstacle1Led.Value = false;
+            Obstacle2Led.Value = false;
+            HoverLed.Value = false;
+            StartLed.Value = false;
+            Motor.Stop();
+        }
     }
 }

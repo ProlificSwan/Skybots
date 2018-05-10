@@ -34,9 +34,6 @@ namespace Robotics.GUI.ViewModel
         RelayCommand _T2Obs2ScoreDecr = null;
 
 
-        public CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(150));
-
-
         /* Question: any issue with using 'static' in this case? Most of the variables in this window should technically only be created once...
          * Answer: Proper usage: probably only use static if this variable would be shared across all instances of MainWindowViewModel.
          * This consideration is probably true for the ArduinoModel, but not the TeamDataModel.  If we want to be technically correct,
@@ -44,16 +41,23 @@ namespace Robotics.GUI.ViewModel
          * instantiated in order. That said, there's no reason to have multiple MainWindows right now, so this distinction is currently 
          * not important. Static works as is right now because the static objects are created in order of declaration (non-static fields may be created in any order).
          */
-        public static TeamDataModel Team1 { get; } = new TeamDataModel("Team 1", Constants.rplat1, Constants.rplat2,Constants.robs1,Constants.robs2,Constants.rhover,
+        public static CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(150));
+                
+        public static TeamDataModel Team1 { get; } = new TeamDataModel("Team 1", Countdown, Constants.rplat1, Constants.rplat2,Constants.robs1,Constants.robs2,Constants.rhover,
                                                                        Constants.rstart,Constants.rmotor1,Constants.rmotor2); //assumption: this is the red team
-        public static TeamDataModel Team2 { get; } = new TeamDataModel("Team 2", Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
+        public static TeamDataModel Team2 { get; } = new TeamDataModel("Team 2", Countdown, Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
                                                                        Constants.bstart, Constants.bmotor1, Constants.bmotor2); //assumption: this is the blue team
         //TODO Research: does this need to be public?
-        public static ArduinoModel arduino = new ArduinoModel(Team1,Team2);        
+        public static ArduinoModel arduino { get; } = new ArduinoModel(Team1, Team2);        
 
         public RelayCommand StartCommand => _cmdStart ?? (_cmdStart = new RelayCommand(execute => Countdown.Start(), canExecute => { return !Countdown.IsRunning; }));
         public RelayCommand StopCommand => _cmdStop ?? (_cmdStop = new RelayCommand(execute => Countdown.Stop(), canExecute => { return Countdown.IsRunning; }));
-        public RelayCommand ResetCommand => _cmdReset ?? (_cmdReset = new RelayCommand(execute => Countdown.Reset()));
+        public RelayCommand ResetCommand => _cmdReset ?? (_cmdReset = new RelayCommand(execute => {
+            Countdown.Reset();
+            Team1.Reset();
+            Team2.Reset();
+            //TODO reset scores as well.
+        }));
        
         //T1 score and sensor control
         public RelayCommand T1HoverIncr => _T1HoverScoreIncr ?? (_T1HoverScoreIncr = new RelayCommand(execute => { Team1.TeamScore.Hover.Increment(); }, canExecute => { return !Team1.TeamScoringMethod.Hover.IsEnabled; }));
