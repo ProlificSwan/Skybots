@@ -36,7 +36,7 @@ namespace Robotics.GUI.Model
             Obstacle2Led.Value = false;
             HoverLed.Value = false;
             StartLed.Value = false;
-            Motor.Stop();
+            Motor.RollingStop();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Robotics.GUI.Model
         {
             name = _name;
             TeamControl = new TeamControlModel(plat1, plat2, obs1, obs2, hover, start,motor1, motor2);
-            _teamGame = new TeamGameModel(TeamScore, TeamControl, countdown);
+            TeamGame = new TeamGameModel(TeamScore, TeamControl, countdown);
         }
 
         private string _name = "Team";
@@ -51,12 +51,15 @@ namespace Robotics.GUI.Model
         } = new TeamSensorModel();
 
         public TeamControlModel TeamControl { get; }
-        private TeamGameModel _teamGame;
+        public TeamGameModel TeamGame { get; }
 
+        //Resets all outputs, scores, and game state to idle values (motors will continue until back to start position)
         public void Reset()
         {
-            _teamGame.Reset();
+            TeamGame.Reset();
             TeamControl.Reset();
+            //TODO determine requirement for changing scores on game reset.
+            //TeamScore.Reset();  
         }
     }
 }

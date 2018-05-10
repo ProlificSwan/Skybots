@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using Solid.Arduino;
 using Solid.Arduino.Firmata;
+using Robotics.GUI.Helpers;
 
 namespace Robotics.GUI.Model
 {
@@ -15,23 +16,18 @@ namespace Robotics.GUI.Model
         private ArduinoSession _session;
         private ISerialConnection _connection;
         private bool _comOK = true;
-        //private LedModel RedLed = new LedModel(12);
         private Timer _keepAliveTimer;
-        private const int _keepAliveInterval = 500; //in msec
-        private LedModel _keepAliveLed = new LedModel(13); //pin 13 is a built-in Arduino pin.
+        private LedModel _keepAliveLed = new LedModel(Constants.keepAliveLed);
         private TeamDataModel _teamData1;
         private TeamDataModel _teamData2;
 
         public ArduinoModel(TeamDataModel teamData1, TeamDataModel teamData2)
         {
-            //ISerialConnection connection = GetConnection();
-
             SetConnection();
             if (_comOK)
             {
                 _session = new ArduinoSession(_connection);
-                _keepAliveTimer = new Timer(_keepAliveInterval);
-                _keepAliveTimer.AutoReset = true;
+                _keepAliveTimer = new Timer(Constants.keepAliveInterval) { AutoReset = true };
                 _keepAliveTimer.Elapsed += _keepAliveTimer_Elapsed;
                 _keepAliveTimer.Start();
             }
@@ -88,8 +84,15 @@ namespace Robotics.GUI.Model
             if (_comOK && led.PinNumber >= 0)
             {
                 led.Value = !led.Value;
-                //TODO add exception handling for random unplugs of serial (so user cannot crash program by unplugging arduino)
-                _session.SetDigitalPin(led.PinNumber, led.Value);
+                try
+                {
+                    _session.SetDigitalPin(led.PinNumber, led.Value);
+                }
+                catch
+                {
+                    _comOK = false;
+                    led.Value = false;
+                }
             }
         }
 
@@ -100,7 +103,15 @@ namespace Robotics.GUI.Model
             if (_comOK && led.PinNumber >= 0)
             {
                 led.Value = value;
-                _session.SetDigitalPin(led.PinNumber, led.Value);
+                try
+                {
+                    _session.SetDigitalPin(led.PinNumber, led.Value);
+                }
+                catch
+                {
+                    _comOK = false;
+                    led.Value = false;
+                }
             }
             return (_comOK && led.Value);
         }
@@ -111,7 +122,15 @@ namespace Robotics.GUI.Model
         {
             if (_comOK && led.PinNumber >= 0)
             {
-                _session.SetDigitalPin(led.PinNumber, led.Value);
+                try
+                {
+                    _session.SetDigitalPin(led.PinNumber, led.Value);
+                }
+                catch
+                {
+                    _comOK = false;
+                    led.Value = false;
+                }
             }
             return (_comOK && led.Value);
         }
@@ -120,16 +139,24 @@ namespace Robotics.GUI.Model
         //Returns false if communication or motor pins are bad.
         public bool SetMotor(MotorModel motor)
         {
+            bool success = false;
             if (_comOK && motor.PinNumber1 >= 0 && motor.PinNumber2 >= 0)
             {
-                _session.SetDigitalPin(motor.PinNumber1, motor.In1);
-                _session.SetDigitalPin(motor.PinNumber2, motor.In2);
+                try
+                {
+                    success = true;
+                    _session.SetDigitalPin(motor.PinNumber1, motor.In1);
+                    _session.SetDigitalPin(motor.PinNumber2, motor.In2);
+                }
+                catch
+                {
+                    success = false;
+                    _comOK = false;
+                    motor.In1 = false;
+                    motor.In2 = false;
+                }
             }
-            else
-            {
-                return false;
-            }
-            return true;
+            return success;
         }
 
         public void CloseConnection()

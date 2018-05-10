@@ -78,7 +78,6 @@ namespace Robotics.GUI.Model
                     {
                         _state = gameState.Hover;
                         _teamControl.StartLed.Value = false;
-                        //TODO add LEDModel event or propertyChanged event so that changing LED value causes arduino model to update physical lights.
                         
                     }
 
@@ -96,7 +95,7 @@ namespace Robotics.GUI.Model
                         _teamControl.HoverLed.Value = false;
                         _teamControl.Obstacle1Led.Value = true;
                         _teamControl.Obstacle2Led.Value = true;
-                        _teamControl.Motor.Forward();
+                        _teamControl.Motor.Play();
                     }
                     break;
                 case gameState.Obstacles:
@@ -105,9 +104,17 @@ namespace Robotics.GUI.Model
                         _state = gameState.Platforms;
                         _teamControl.Obstacle1Led.Value = false;
                         _teamControl.Obstacle2Led.Value = false;
-                        _teamControl.Motor.Stop();
+                        _teamControl.Motor.RollingStop();
                         _teamControl.Platform1Led.Value = true;
                         _teamControl.Platform2Led.Value = true;
+                    }
+                    else if (timeLeft > hoverLeft && _teamScore.Hover.Score == 0) //covers accidental hover score change case (go back to previous state)
+                    {
+                        _state = gameState.Hover;
+                        _teamControl.HoverLed.Value = true;
+                        _teamControl.Obstacle1Led.Value = false;
+                        _teamControl.Obstacle2Led.Value = false;
+                        _teamControl.Motor.RollingStop();
                     }
                     break;
                 case gameState.Platforms:
@@ -129,9 +136,26 @@ namespace Robotics.GUI.Model
             //do something special?
         }
 
+        public void Pause()
+        {
+            if (_state == gameState.Obstacles)
+            {
+                _teamControl.Motor.Pause();
+            }
+        }
+
+        public void Continue()
+        {
+            if (_state == gameState.Obstacles)
+            {
+                _teamControl.Motor.Continue();
+            }
+        }
+
         public void Reset()
         {
             _state = gameState.Idle;
+            //Note that TeamControl.Reset() resets motors and lights itself.
         }
 
     }

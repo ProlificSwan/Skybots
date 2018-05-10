@@ -42,16 +42,20 @@ namespace Robotics.GUI.ViewModel
          * not important. Static works as is right now because the static objects are created in order of declaration (non-static fields may be created in any order).
          */
         public static CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(150));
-                
-        public static TeamDataModel Team1 { get; } = new TeamDataModel("Team 1", Countdown, Constants.rplat1, Constants.rplat2,Constants.robs1,Constants.robs2,Constants.rhover,
-                                                                       Constants.rstart,Constants.rmotor1,Constants.rmotor2); //assumption: this is the red team
+
+        public static TeamDataModel Team1 { get; } = new TeamDataModel("Team 1", Countdown, Constants.rplat1, Constants.rplat2, Constants.robs1, Constants.robs2, Constants.rhover,
+                                                                       Constants.rstart, Constants.rmotor1, Constants.rmotor2); //assumption: this is the red team
         public static TeamDataModel Team2 { get; } = new TeamDataModel("Team 2", Countdown, Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
                                                                        Constants.bstart, Constants.bmotor1, Constants.bmotor2); //assumption: this is the blue team
         //TODO Research: does this need to be public?
-        public static ArduinoModel arduino { get; } = new ArduinoModel(Team1, Team2);        
+        public static ArduinoModel arduino { get; } = new ArduinoModel(Team1, Team2);
 
-        public RelayCommand StartCommand => _cmdStart ?? (_cmdStart = new RelayCommand(execute => Countdown.Start(), canExecute => { return !Countdown.IsRunning; }));
-        public RelayCommand StopCommand => _cmdStop ?? (_cmdStop = new RelayCommand(execute => Countdown.Stop(), canExecute => { return Countdown.IsRunning; }));
+        public RelayCommand StartCommand => _cmdStart ?? (_cmdStart = new RelayCommand(execute => {Countdown.Start();}, canExecute => { return !Countdown.IsRunning; }));
+        public RelayCommand StopCommand => _cmdStop ?? (_cmdStop = new RelayCommand(execute => {
+            Countdown.Stop();
+            Team1.TeamGame.Pause();
+            Team2.TeamControl.Motor.Pause();
+        }, canExecute => { return Countdown.IsRunning; }));
         public RelayCommand ResetCommand => _cmdReset ?? (_cmdReset = new RelayCommand(execute => {
             Countdown.Reset();
             Team1.Reset();

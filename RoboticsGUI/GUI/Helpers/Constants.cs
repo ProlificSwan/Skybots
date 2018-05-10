@@ -8,6 +8,10 @@ namespace Robotics.GUI.Helpers
 {
     public static class Constants
     {
+        //Default time motors spend moving in each direction.
+        public const double motorFwdTime = 1000; //milliseconds.
+        public const double motorBackTime = 1000; //milliseconds.
+
         //Scoring increments for the scoring areas.
         public const uint platInc = 100; //Not sure which platform is the larger one, so use 100 increment for now.
         public const uint obs1Inc = 20; // Moving obstacle
@@ -33,5 +37,8 @@ namespace Robotics.GUI.Helpers
         public const short bstart   = 33; //Start
         public const short bmotor1  = 4;  //Motor1
         public const short bmotor2  = 5;  //Motor2
+
+        public const short keepAliveLed = 13; //Pin 13 is the built in Arduino pin we are using to physically show communication is OK
+        public const int keepAliveInterval = 500; //how often to blink LED in msec
     }
 }
