@@ -50,7 +50,11 @@ namespace Robotics.GUI.ViewModel
         //TODO Research: does this need to be public?
         public static ArduinoModel arduino { get; } = new ArduinoModel(Team1, Team2);
 
-        public RelayCommand StartCommand => _cmdStart ?? (_cmdStart = new RelayCommand(execute => {Countdown.Start();}, canExecute => { return !Countdown.IsRunning; }));
+        public RelayCommand StartCommand => _cmdStart ?? (_cmdStart = new RelayCommand(execute => {
+            Countdown.Start();
+            Team1.TeamGame.Continue();
+            Team2.TeamGame.Continue();
+        }, canExecute => { return !Countdown.IsRunning; }));
         public RelayCommand StopCommand => _cmdStop ?? (_cmdStop = new RelayCommand(execute => {
             Countdown.Stop();
             Team1.TeamGame.Pause();

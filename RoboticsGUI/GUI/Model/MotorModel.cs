@@ -11,18 +11,47 @@ namespace Robotics.GUI.Model
     //Stores LED state and Arduino pin number
     public class MotorModel : BaseModel
     {
-        public double ForwardTime { get; set; } = Constants.motorFwdTime;
-        public double BackwardTime { get; set; } = Constants.motorBackTime;
+        public int ForwardTime
+        {
+            get
+            {
+                return _forwardTime;
+            }
+            set
+            {
+                if (_forwardTimer != null)
+                {
+                    _forwardTimer.Interval = value;
+                }
+                _forwardTime = value;
+            }
+        }
+        public int BackwardTime
+        {
+            get
+            {
+                return _backwardTime;
+            }
+            set
+            {
+                if (_backwardTimer != null)
+                {
+                    _backwardTimer.Interval = value;
+                }
+                _backwardTime = value;
+            }
+        }
+
+        private int _forwardTime;
+        private int _backwardTime;
         private MoveState _state = MoveState.Start;
         private bool _stopping = false;
         private Int16 _pinNumber1;
         private Int16 _pinNumber2;
         private bool _in1;
         private bool _in2;
-        private Timer _forwardTimer;
-        private Timer _backwardTimer;
-        private double _remainingFwdTime;
-        private double _remainingBackTime;
+        private PauseableTimer _forwardTimer;
+        private PauseableTimer _backwardTimer;
 
         private enum MoveState
         {
@@ -39,9 +68,11 @@ namespace Robotics.GUI.Model
             this._pinNumber2 = pinNumber2;
             this._in1 = in1;
             this._in2 = in2;
-            _forwardTimer = new Timer(ForwardTime) { AutoReset = false };
+            ForwardTime = Constants.motorFwdTime;
+            BackwardTime = Constants.motorBackTime;
+            _forwardTimer = new PauseableTimer(ForwardTime);
             _forwardTimer.Elapsed += OnForwardTimerElapsed;
-            _backwardTimer = new Timer(BackwardTime) { AutoReset = false };
+            _backwardTimer = new PauseableTimer(BackwardTime);
             _backwardTimer.Elapsed += OnBackwardTimerElapsed;
         }
 
@@ -51,9 +82,11 @@ namespace Robotics.GUI.Model
             this._pinNumber2 = pinNumber2;
             this._in1 = false;
             this._in2 = false;
-            _forwardTimer = new Timer(ForwardTime) { AutoReset = false };
+            ForwardTime = Constants.motorFwdTime;
+            BackwardTime = Constants.motorBackTime;
+            _forwardTimer = new PauseableTimer(ForwardTime);
             _forwardTimer.Elapsed += OnForwardTimerElapsed;
-            _backwardTimer = new Timer(BackwardTime) { AutoReset = false };
+            _backwardTimer = new PauseableTimer(BackwardTime);
             _backwardTimer.Elapsed += OnBackwardTimerElapsed;
 
         }
@@ -66,6 +99,7 @@ namespace Robotics.GUI.Model
             {
                 _state = MoveState.MoveFwd;
                 Forward();
+                //_forwardTimer.Reset();
                 _forwardTimer.Start();
             }
             else if (_state == MoveState.PauseBack || _state ==MoveState.PauseFwd)
@@ -74,15 +108,18 @@ namespace Robotics.GUI.Model
             }
         }
 
-        private void OnForwardTimerElapsed(object sender, ElapsedEventArgs e)
+        private void OnForwardTimerElapsed(object sender, EventArgs e)
         {
+            _forwardTimer.Reset();
             Backward();
             _state = MoveState.MoveBack;
+            //_backwardTimer.Reset();
             _backwardTimer.Start();
         }
 
-        private void OnBackwardTimerElapsed(object sender, ElapsedEventArgs e)
+        private void OnBackwardTimerElapsed(object sender, EventArgs e)
         {
+            _backwardTimer.Reset();
             _state = MoveState.Start;
             CompleteLoop(); //keep running until told to do otherwise.
         }
@@ -131,15 +168,12 @@ namespace Robotics.GUI.Model
             if (_state == MoveState.MoveFwd)
             {
                 _state = MoveState.PauseFwd;
-                _remainingFwdTime = _forwardTimer.Interval;
-                _forwardTimer.Stop();
-                //pause fwd timer
+                _forwardTimer.Pause();
             }
             else if (_state == MoveState.MoveBack)
             {
                 _state = MoveState.PauseBack;
-                _remainingBackTime = _backwardTimer.Interval;
-                _backwardTimer.Stop();
+                _backwardTimer.Pause();
             }
         }
 
@@ -151,13 +185,13 @@ namespace Robotics.GUI.Model
             {
                 _state = MoveState.MoveFwd;
                 Forward();
-                //continue forward timer
+                _forwardTimer.Continue();
             }
             else if (_state == MoveState.PauseBack)
             {
                 _state = MoveState.MoveBack;
                 Backward();
-                //continue backward timer
+                _backwardTimer.Continue();
             }
 
         }
@@ -177,10 +211,8 @@ namespace Robotics.GUI.Model
             Stop();
             _stopping = false;
             _state = MoveState.Start;
-            _forwardTimer.Stop();
-            _backwardTimer.Stop();
-            _remainingFwdTime = 0;
-            _remainingBackTime = 0;
+            _forwardTimer.Reset();
+            _backwardTimer.Reset();
         }
 
 

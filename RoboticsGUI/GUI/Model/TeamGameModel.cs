@@ -30,7 +30,7 @@ namespace Robotics.GUI.Model
         public enum gameState
         {
             Idle,
-            StartHover,
+            Start,
             Hover,
             Obstacles,
             Platforms
@@ -68,12 +68,12 @@ namespace Robotics.GUI.Model
                 case gameState.Idle:
                     if (timeLeft > 0 && timeLeft < _countdown.Timeout.TotalMilliseconds)
                     {
-                        _state = gameState.StartHover;
+                        _state = gameState.Start;
                         _teamControl.StartLed.Value = true;
                         _teamControl.HoverLed.Value = true;
                     }
                     break;
-                case gameState.StartHover:
+                case gameState.Start:
                     if (timeLeft <= startLeft)
                     {
                         _state = gameState.Hover;
@@ -81,12 +81,13 @@ namespace Robotics.GUI.Model
                         
                     }
 
+                    /*Actually it's impossible to finish the hover during the first five seconds, so don't allow the state to change early.
                     if (_teamScore.Hover.Score > 0)
                     {
                         _state = gameState.Obstacles;
                         _teamControl.StartLed.Value = false;
                         _teamControl.HoverLed.Value = false;
-                    }
+                    }*/
                     break;
                 case gameState.Hover:
                     if (_teamScore.Hover.Score > 0 || timeLeft <= hoverLeft)

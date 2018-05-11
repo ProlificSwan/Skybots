@@ -9,8 +9,8 @@ namespace Robotics.GUI.Helpers
     public static class Constants
     {
         //Default time motors spend moving in each direction.
-        public const double motorFwdTime = 1000; //milliseconds.
-        public const double motorBackTime = 1000; //milliseconds.
+        public const int motorFwdTime = 1000; //milliseconds.
+        public const int motorBackTime = 1000; //milliseconds.
 
         //Scoring increments for the scoring areas.
         public const uint platInc = 100; //Not sure which platform is the larger one, so use 100 increment for now.

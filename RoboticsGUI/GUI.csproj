@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GUI\Helpers\Constants.cs" />
+    <Compile Include="GUI\Helpers\PauseableTimer.cs" />
     <Compile Include="GUI\Helpers\RelayCommand.cs" />
     <Compile Include="GUI\Model\BaseModel.cs" />
     <Compile Include="GUI\Model\ArduinoModel.cs" />
