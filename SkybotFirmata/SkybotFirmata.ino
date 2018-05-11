@@ -810,10 +810,15 @@ void loop()
   
   if (currentMillis - lastRecvMillis > 1000)
   {
-    /* SERIAL DETECT - turn off some known outputs if stay alive signal not received */
+    /* SERIAL DETECT - turn off some important outputs if stay alive signal not received */
+    //built in LED
     digitalWrite(13, LOW);
+    //motor pins
+    digitalWrite(2, LOW);
+    digitalWrite(3, LOW);
+    digitalWrite(4, LOW);
+    digitalWrite(5, LOW);
   }
-  //digitalWrite(13, LOW);
   
   if (currentMillis - previousMillis > samplingInterval) {
     previousMillis += samplingInterval;
