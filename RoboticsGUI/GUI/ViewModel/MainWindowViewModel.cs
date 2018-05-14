@@ -21,6 +21,12 @@ namespace Robotics.GUI.ViewModel
         RelayCommand _T1Obs1ScoreDecr = null;
         RelayCommand _T1Obs2ScoreIncr = null;
         RelayCommand _T1Obs2ScoreDecr = null;
+        RelayCommand _T1MotorBack = null;
+        RelayCommand _T1MotorFwd = null;
+        RelayCommand _T1MotorStop = null;
+        RelayCommand _T1MotorPause = null;
+        RelayCommand _T1MotorReturn = null;
+        RelayCommand _T1MotorPlay = null;
 
         RelayCommand _T2HoverScoreIncr = null;
         RelayCommand _T2HoverScoreDecr = null;
@@ -33,6 +39,12 @@ namespace Robotics.GUI.ViewModel
         RelayCommand _T2Obs2ScoreIncr = null;
         RelayCommand _T2Obs2ScoreDecr = null;
 
+        RelayCommand _T2MotorBack = null;
+        RelayCommand _T2MotorFwd = null;
+        RelayCommand _T2MotorStop = null;
+        RelayCommand _T2MotorPause = null;
+        RelayCommand _T2MotorPlay = null;
+        RelayCommand _T2MotorReturn = null;
 
         /* Question: any issue with using 'static' in this case? Most of the variables in this window should technically only be created once...
          * Answer: Proper usage: probably only use static if this variable would be shared across all instances of MainWindowViewModel.
@@ -43,12 +55,25 @@ namespace Robotics.GUI.ViewModel
          */
         public static CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(150));
 
-        public static TeamDataModel Team1 { get; } = new TeamDataModel("Team 1", Countdown, Constants.rplat1, Constants.rplat2, Constants.robs1, Constants.robs2, Constants.rhover,
+        public static TeamDataModel Team1 { get; } = new TeamDataModel("Red Team", Countdown, Constants.rplat1, Constants.rplat2, Constants.robs1, Constants.robs2, Constants.rhover,
                                                                        Constants.rstart, Constants.rmotor1, Constants.rmotor2); //assumption: this is the red team
-        public static TeamDataModel Team2 { get; } = new TeamDataModel("Team 2", Countdown, Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
+        public static TeamDataModel Team2 { get; } = new TeamDataModel("Blue Team", Countdown, Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
                                                                        Constants.bstart, Constants.bmotor1, Constants.bmotor2); //assumption: this is the blue team
         //TODO Research: does this need to be public?
-        public static ArduinoModel arduino { get; } = new ArduinoModel(Team1, Team2);
+        public static ArduinoModel Arduino { get; } = new ArduinoModel(Team1, Team2);
+
+        public bool StartLedUnionProperty
+        {
+            get
+            {
+                return Team1.TeamControl.StartLed.Value && Team2.TeamControl.StartLed.Value;
+            }
+            set
+            {
+                Team1.TeamControl.StartLed.Value = value;
+                Team2.TeamControl.StartLed.Value = value;
+            }
+        }
 
         public RelayCommand StartCommand => _cmdStart ?? (_cmdStart = new RelayCommand(execute => {
             Countdown.Start();
@@ -66,7 +91,7 @@ namespace Robotics.GUI.ViewModel
             Team2.Reset();
             //TODO reset scores as well.
         }));
-       
+
         //T1 score and sensor control
         public RelayCommand T1HoverIncr => _T1HoverScoreIncr ?? (_T1HoverScoreIncr = new RelayCommand(execute => { Team1.TeamScore.Hover.Increment(); }, canExecute => { return !Team1.TeamScoringMethod.Hover.IsEnabled; }));
         public RelayCommand T1HoverDecr => _T1HoverScoreDecr ?? (_T1HoverScoreDecr = new RelayCommand(execute => { Team1.TeamScore.Hover.Decrement(); }, canExecute => { return !Team1.TeamScoringMethod.Hover.IsEnabled; }));
@@ -78,6 +103,12 @@ namespace Robotics.GUI.ViewModel
         public RelayCommand T1Obs1Decr => _T1Obs1ScoreDecr ?? (_T1Obs1ScoreDecr = new RelayCommand(execute => { Team1.TeamScore.Obstacle1.Decrement(); }, canExecute => { return !Team1.TeamScoringMethod.Obstacle1.IsEnabled; }));
         public RelayCommand T1Obs2Incr => _T1Obs2ScoreIncr ?? (_T1Obs2ScoreIncr = new RelayCommand(execute => { Team1.TeamScore.Obstacle2.Increment(); }, canExecute => { return !Team1.TeamScoringMethod.Obstacle2.IsEnabled; }));
         public RelayCommand T1Obs2Decr => _T1Obs2ScoreDecr ?? (_T1Obs2ScoreDecr = new RelayCommand(execute => { Team1.TeamScore.Obstacle2.Decrement(); }, canExecute => { return !Team1.TeamScoringMethod.Obstacle2.IsEnabled; }));
+        public RelayCommand T1MotorBack => _T1MotorBack ?? (_T1MotorBack = new RelayCommand(execute => { Team1.TeamControl.Motor.Backward(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T1MotorFwd => _T1MotorFwd ?? (_T1MotorFwd = new RelayCommand(execute => { Team1.TeamControl.Motor.Forward(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T1MotorStop => _T1MotorStop ?? (_T1MotorStop = new RelayCommand(execute => { Team1.TeamControl.Motor.EmergencyStop(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T1MotorReturn => _T1MotorReturn ?? (_T1MotorReturn = new RelayCommand(execute => { Team1.TeamControl.Motor.RollingStop(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T1MotorPlay => _T1MotorPlay ?? (_T1MotorPlay = new RelayCommand(execute => { Team1.TeamControl.Motor.Play(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T1MotorPause => _T1MotorPause ?? (_T1MotorPause = new RelayCommand(execute => { Team1.TeamControl.Motor.Pause(); }, canExecute => { return Arduino.ComOK; }));
 
         //T2 score and sensor control
         public RelayCommand T2HoverIncr => _T2HoverScoreIncr ?? (_T2HoverScoreIncr = new RelayCommand(execute => { Team2.TeamScore.Hover.Increment(); }, canExecute => { return !Team2.TeamScoringMethod.Hover.IsEnabled; }));
@@ -90,10 +121,16 @@ namespace Robotics.GUI.ViewModel
         public RelayCommand T2Obs1Decr => _T2Obs1ScoreDecr ?? (_T2Obs1ScoreDecr = new RelayCommand(execute => { Team2.TeamScore.Obstacle1.Decrement(); }, canExecute => { return !Team2.TeamScoringMethod.Obstacle1.IsEnabled; }));
         public RelayCommand T2Obs2Incr => _T2Obs2ScoreIncr ?? (_T2Obs2ScoreIncr = new RelayCommand(execute => { Team2.TeamScore.Obstacle2.Increment(); }, canExecute => { return !Team2.TeamScoringMethod.Obstacle2.IsEnabled; }));
         public RelayCommand T2Obs2Decr => _T2Obs2ScoreDecr ?? (_T2Obs2ScoreDecr = new RelayCommand(execute => { Team2.TeamScore.Obstacle2.Decrement(); }, canExecute => { return !Team2.TeamScoringMethod.Obstacle2.IsEnabled; }));
+        public RelayCommand T2MotorBack => _T2MotorBack ?? (_T2MotorBack = new RelayCommand(execute => { Team2.TeamControl.Motor.Backward(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T2MotorFwd => _T2MotorFwd ?? (_T2MotorFwd = new RelayCommand(execute => { Team2.TeamControl.Motor.Forward(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T2MotorStop => _T2MotorStop ?? (_T2MotorStop = new RelayCommand(execute => { Team2.TeamControl.Motor.EmergencyStop(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T2MotorReturn => _T2MotorReturn ?? (_T2MotorReturn = new RelayCommand(execute => { Team2.TeamControl.Motor.RollingStop(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T2MotorPlay => _T2MotorPlay ?? (_T2MotorPlay = new RelayCommand(execute => { Team2.TeamControl.Motor.Play(); }, canExecute => { return Arduino.ComOK; }));
+        public RelayCommand T2MotorPause => _T2MotorPause ?? (_T2MotorPause = new RelayCommand(execute => { Team2.TeamControl.Motor.Pause(); }, canExecute => { return Arduino.ComOK; }));
 
         public override void OnClosing(object sender, CancelEventArgs e)
         {
-            arduino.CloseConnection();
+            Arduino.CloseConnection();
             Dispose();
         }
 
