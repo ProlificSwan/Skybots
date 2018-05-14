@@ -11,7 +11,7 @@ namespace Robotics.GUI.Model
         public TeamDataModel(string nameVal = "Team")
         {
             Name = nameVal;
-            TeamControl = new TeamControlModel(-1, -1, -1, -1, -1, -1, -1, -1);
+            TeamControl = new TeamControlModel(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
             //_teamGame = new TeamGameModel(TeamScore, TeamControl);
         }
 
@@ -19,6 +19,13 @@ namespace Robotics.GUI.Model
         {
             Name = nameVal;
             TeamControl = new TeamControlModel(plat1, plat2, obs1, obs2, hover, start,motor1, motor2);
+            TeamGame = new TeamGameModel(TeamScore, TeamControl, countdown);
+        }
+
+        public TeamDataModel(string nameVal, CountdownModel countdown, Int16 plat1, Int16 plat2, Int16 obs1, Int16 obs2, Int16 hover, Int16 start, Int16 motor1, Int16 motor2, int fwdTime, int backTime)
+        {
+            Name = nameVal;
+            TeamControl = new TeamControlModel(plat1, plat2, obs1, obs2, hover, start, motor1, motor2, fwdTime, backTime);
             TeamGame = new TeamGameModel(TeamScore, TeamControl, countdown);
         }
 

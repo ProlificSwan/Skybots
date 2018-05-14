@@ -19,11 +19,7 @@ namespace Robotics.GUI.Model
             }
             set
             {
-                if (_forwardTimer != null)
-                {
-                    _forwardTimer.Interval = value;
-                }
-                _forwardTime = value;
+                SetProperty(ref _forwardTime, value);
             }
         }
         public int BackwardTime
@@ -34,16 +30,14 @@ namespace Robotics.GUI.Model
             }
             set
             {
-                if (_backwardTimer != null)
-                {
-                    _backwardTimer.Interval = value;
-                }
-                _backwardTime = value;
+                SetProperty(ref _backwardTime, value);
             }
         }
 
         private int _forwardTime;
         private int _backwardTime;
+        private int _lastForwardTime;
+        private int _lastBackwardTime;
         private MoveState _state = MoveState.Start;
         private bool _stopping = false;
         private Int16 _pinNumber1;
@@ -62,28 +56,32 @@ namespace Robotics.GUI.Model
             PauseBack
         }
 
-        public MotorModel(short pinNumber1, short pinNumber2, bool in1, bool in2)
+        public MotorModel(short pinNumber1, short pinNumber2, bool in1, bool in2, int fwdTime = Constants.defaultMotorFwdTime, int backTime = Constants.defaultMotorBackTime)
         {
             this._pinNumber1 = pinNumber1;
             this._pinNumber2 = pinNumber2;
             this._in1 = in1;
             this._in2 = in2;
-            ForwardTime = Constants.motorFwdTime;
-            BackwardTime = Constants.motorBackTime;
+            ForwardTime = fwdTime;
+            _lastForwardTime = ForwardTime;
+            BackwardTime = backTime;
+            _lastBackwardTime = BackwardTime;
             _forwardTimer = new PauseableTimer(ForwardTime);
             _forwardTimer.Elapsed += OnForwardTimerElapsed;
             _backwardTimer = new PauseableTimer(BackwardTime);
             _backwardTimer.Elapsed += OnBackwardTimerElapsed;
         }
 
-        public MotorModel(short pinNumber1, short pinNumber2)
+        public MotorModel(short pinNumber1, short pinNumber2, int fwdTime = Constants.defaultMotorFwdTime, int backTime = Constants.defaultMotorBackTime)
         {
             this._pinNumber1 = pinNumber1;
             this._pinNumber2 = pinNumber2;
             this._in1 = false;
             this._in2 = false;
-            ForwardTime = Constants.motorFwdTime;
-            BackwardTime = Constants.motorBackTime;
+            ForwardTime = fwdTime;
+            _lastForwardTime = ForwardTime;
+            BackwardTime = backTime;
+            _lastBackwardTime = BackwardTime;
             _forwardTimer = new PauseableTimer(ForwardTime);
             _forwardTimer.Elapsed += OnForwardTimerElapsed;
             _backwardTimer = new PauseableTimer(BackwardTime);
@@ -99,7 +97,7 @@ namespace Robotics.GUI.Model
             {
                 _state = MoveState.MoveFwd;
                 Forward();
-                //_forwardTimer.Reset();
+                CheckIntervalChange();
                 _forwardTimer.Start();
             }
             else if (_state == MoveState.PauseBack || _state ==MoveState.PauseFwd)
@@ -108,12 +106,26 @@ namespace Robotics.GUI.Model
             }
         }
 
+        //Intended to update motor movement timer/interval(s) as needed when in MoveState.Start state.
+        private void CheckIntervalChange()
+        {
+            if (_forwardTime != _lastForwardTime)
+            {
+                _lastForwardTime = _forwardTime;
+                _forwardTimer.Interval = _forwardTime;
+            }
+            if (_backwardTime != _lastBackwardTime)
+            {
+                _lastBackwardTime = _backwardTime;
+                _backwardTimer.Interval = _backwardTime;
+            }
+        }
+
         private void OnForwardTimerElapsed(object sender, EventArgs e)
         {
             _forwardTimer.Reset();
             Backward();
             _state = MoveState.MoveBack;
-            //_backwardTimer.Reset();
             _backwardTimer.Start();
         }
 

@@ -9,6 +9,17 @@ namespace Robotics.GUI.Model
     //Defines all controllable elements on a team's side of the field along with their control pin numbers
     class TeamControlModel : BaseModel
     {
+        public TeamControlModel(Int16 plat1, Int16 plat2, Int16 obs1, Int16 obs2, Int16 hover, Int16 start, Int16 motor1, Int16 motor2, int fwdTime, int backTime)
+        {
+            Platform1Led = new LedModel(plat1);
+            Platform2Led = new LedModel(plat2);
+            Obstacle1Led = new LedModel(obs1);
+            Obstacle2Led = new LedModel(obs2);
+            HoverLed = new LedModel(hover);
+            StartLed = new LedModel(start);
+            Motor = new MotorModel(motor1, motor2, fwdTime, backTime);
+        }
+
         public TeamControlModel(Int16 plat1, Int16 plat2, Int16 obs1, Int16 obs2, Int16 hover, Int16 start, Int16 motor1, Int16 motor2)
         {
             Platform1Led = new LedModel(plat1);
@@ -18,7 +29,7 @@ namespace Robotics.GUI.Model
             HoverLed = new LedModel(hover);
             StartLed = new LedModel(start);
             Motor = new MotorModel(motor1, motor2);
-    }
+        }
 
         public LedModel Platform1Led { get; }
         public LedModel Platform2Led { get; }

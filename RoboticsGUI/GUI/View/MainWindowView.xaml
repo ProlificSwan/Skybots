@@ -84,7 +84,7 @@
         </Viewbox>
         <Button Grid.Row="2" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1HoverIncr, Mode=OneWay}" />
         <Button Grid.Row="2" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1HoverDecr, Mode=OneWay}" />
-        <CheckBox Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.HoverLed.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.HoverLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="3" Margin="5" >
             <Label Content="Plat 1" Width="35" />
         </Viewbox>
@@ -96,7 +96,7 @@
         </Viewbox>
         <Button Grid.Row="3" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat1Incr, Mode=OneWay}" />
         <Button Grid.Row="3" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Platform1Led.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Platform1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="4" Margin="5">
             <Label Content="Plat 2" Width="35" />
         </Viewbox>
@@ -108,7 +108,7 @@
         </Viewbox>
         <Button Grid.Row="4" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat2Incr, Mode=OneWay}" />
         <Button Grid.Row="4" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Platform2Led.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Platform2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="5" Margin="5" >
             <Label Content="Obs 1" Width="35" />
         </Viewbox>
@@ -120,7 +120,7 @@
         </Viewbox>
         <Button Grid.Row="5" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs1Incr, Mode=OneWay}" />
         <Button Grid.Row="5" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Obstacle1Led.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Obstacle1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="6" Margin="5">
             <Label Content="Obs 2" Width="35" />
         </Viewbox>
@@ -132,11 +132,11 @@
         </Viewbox>
         <Button Grid.Row="6" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs2Incr, Mode=OneWay}" />
         <Button Grid.Row="6" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Obstacle2Led.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Obstacle2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="7" Margin="5">
             <Label Content="Start" Width="35" />
         </Viewbox>
-        <CheckBox Grid.Row="7" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.StartLed.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="7" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.StartLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="9" Margin="5" >
             <Label Width="35" Content="Hover" />
         </Viewbox>
@@ -218,7 +218,7 @@
         </Viewbox>
         <Button Grid.Row="2" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2HoverIncr, Mode=OneWay}" />
         <Button Grid.Row="2" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2HoverDecr, Mode=OneWay}" />
-        <CheckBox Grid.Row="2" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.HoverLed.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="2" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.HoverLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="3" Grid.Column="11" Margin="5" >
             <Label Content="Plat 1" Width="35" />
         </Viewbox>
@@ -230,7 +230,7 @@
         </Viewbox>
         <Button Grid.Row="3" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat1Incr, Mode=OneWay}" />
         <Button Grid.Row="3" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="3" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Platform1Led.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="3" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Platform1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="4" Grid.Column="11" Margin="5">
             <Label Content="Plat 2" Width="35" />
         </Viewbox>
@@ -242,7 +242,7 @@
         </Viewbox>
         <Button Grid.Row="4" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat2Incr, Mode=OneWay}" />
         <Button Grid.Row="4" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="4" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Platform2Led.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="4" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Platform2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="5" Grid.Column="11" Margin="5" >
             <Label Content="Obs 1" Width="35" />
         </Viewbox>
@@ -254,7 +254,7 @@
         </Viewbox>
         <Button Grid.Row="5" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs1Incr, Mode=OneWay}" />
         <Button Grid.Row="5" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="5" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Obstacle1Led.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="5" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Obstacle1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="6" Grid.Column="11" Margin="5">
             <Label Content="Obs 2" Width="35" />
         </Viewbox>
@@ -266,11 +266,11 @@
         </Viewbox>
         <Button Grid.Row="6" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs2Incr, Mode=OneWay}" />
         <Button Grid.Row="6" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="6" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Obstacle2Led.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="6" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Obstacle2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="7" Grid.Column="11" Margin="5">
             <Label Content="Start" Width="35" />
         </Viewbox>
-        <CheckBox Grid.Row="7" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.StartLed.Value}" IsEnabled="{Binding arduino.ComOK}"/>
+        <CheckBox Grid.Row="7" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.StartLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
         <Viewbox Grid.Row="9" Grid.Column="11" Margin="5" >
             <Label Width="35" Content="Hover" />
         </Viewbox>
@@ -318,16 +318,26 @@
             <Label Content="Start Lights:"  />
         </Viewbox>
         <Viewbox Grid.Row="4" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="7">
-            <CheckBox  IsChecked="{Binding StartLedUnionProperty}" IsEnabled="{Binding arduino.ComOK}"/>
+            <CheckBox  IsChecked="{Binding StartLedUnionProperty}" IsEnabled="{Binding Arduino.ComOK}"/>
         </Viewbox>
+        <Button Content="&lt;--" Grid.Column="7" Margin="17,7,23,5" Grid.Row="9" Command="{Binding T1MotorBack, Mode=OneWay}" />
+        <Button Content="--&gt;" Grid.Column="9" Margin="17,7,23,5" Grid.Row="9" Command="{Binding T1MotorFwd, Mode=OneWay}"/>
+        <Button Content="Test Play" Grid.Column="7" Grid.Row="10" Command="{Binding T1MotorPlay}"/>
+        <Button Content="Return Stop" Grid.Column="8" Grid.Row="10" Command="{Binding T1MotorReturn}"/>
+        <TextBox Grid.Column="7" Margin="5" Grid.Row="11" TextWrapping="Wrap" Text="{Binding Team1.TeamControl.Motor.BackwardTime, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="9" Margin="5" Grid.Row="11" TextWrapping="Wrap" Text="{Binding Team1.TeamControl.Motor.ForwardTime, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Force Stop" Grid.Column="8" Grid.Row="9" Command="{Binding T1MotorStop, Mode=OneWay}" Margin="0,0,0,2"/>
+        <Button Content="Test Pause" Grid.Column="9" Grid.Row="10" Grid.ColumnSpan="2" Margin="1,0,20,0" Command="{Binding T1MotorPause, Mode=OneWay}"/>
+        <Label Content="T1 Motor Control" Grid.Column="7" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="8" Width="100" Grid.ColumnSpan="3"/>
+
         <Button Content="&lt;--" Grid.Column="7" Margin="17,7,23,5" Grid.Row="13" Command="{Binding T2MotorBack, Mode=OneWay}" />
         <Button Content="--&gt;" Grid.Column="9" Margin="17,7,23,5" Grid.Row="13" Command="{Binding T2MotorFwd, Mode=OneWay}"/>
         <Button Content="Test Play" Grid.Column="7" Grid.Row="14" Command="{Binding T2MotorPlay}"/>
         <Button Content="Return Stop" Grid.Column="8" Grid.Row="14" Command="{Binding T2MotorReturn}"/>
-        <TextBox Grid.Column="7" HorizontalAlignment="Center" Height="21" Margin="7,6,2,4" Grid.Row="15" TextWrapping="Wrap" VerticalAlignment="Center" Width="56" Text="L-msecs"/>
-        <TextBox Grid.Column="9" HorizontalAlignment="Center" Height="21" Margin="10,6,20,4" Grid.Row="15" TextWrapping="Wrap" VerticalAlignment="Center" Width="56" Text="R-msecs" Grid.ColumnSpan="2"/>
-        <Button Content="Emergency&#xD;&#xA;Stop" Grid.Column="8" HorizontalAlignment="Center" Grid.Row="12" VerticalAlignment="Center"  Height="34" Width="65" Margin="0,24,0,1" Grid.RowSpan="2" Command="{Binding T2MotorStop, Mode=OneWay}"/>
+        <TextBox Grid.Column="7" Margin="5" Grid.Row="15" TextWrapping="Wrap" Text="{Binding Team2.TeamControl.Motor.BackwardTime, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="9" Margin="5" Grid.Row="15" TextWrapping="Wrap" Text="{Binding Team2.TeamControl.Motor.ForwardTime, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Force Stop" Grid.Column="8" Grid.Row="13" Command="{Binding T2MotorStop, Mode=OneWay}" Margin="0,0,0,2"/>
         <Button Content="Test Pause" Grid.Column="9" Grid.Row="14" Grid.ColumnSpan="2" Margin="1,0,20,0" Command="{Binding T2MotorPause}"/>
-        <Label Content="T2 Motor Control" Grid.Column="7" HorizontalAlignment="Left" Height="18" Margin="51,2,0,0" Grid.Row="12" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="3"/>
+        <Label Content="T2 Motor Control" Grid.Column="7" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="12" Width="100" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

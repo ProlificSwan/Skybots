@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Robotics.GUI.ViewModel;
 
 namespace Robotics.GUI.View
 {
@@ -13,6 +14,8 @@ namespace Robotics.GUI.View
         public MainWindowView()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
+            Closing += ((MainWindowViewModel)this.DataContext).OnClosing;
         }
     }
 }

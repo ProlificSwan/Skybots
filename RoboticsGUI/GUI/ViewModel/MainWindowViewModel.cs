@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Robotics.GUI.Model;
 using Robotics.GUI.Helpers;
+using Robotics.Properties;
 
 namespace Robotics.GUI.ViewModel
 {
@@ -21,12 +22,14 @@ namespace Robotics.GUI.ViewModel
         RelayCommand _T1Obs1ScoreDecr = null;
         RelayCommand _T1Obs2ScoreIncr = null;
         RelayCommand _T1Obs2ScoreDecr = null;
+
         RelayCommand _T1MotorBack = null;
         RelayCommand _T1MotorFwd = null;
         RelayCommand _T1MotorStop = null;
         RelayCommand _T1MotorPause = null;
         RelayCommand _T1MotorReturn = null;
         RelayCommand _T1MotorPlay = null;
+
 
         RelayCommand _T2HoverScoreIncr = null;
         RelayCommand _T2HoverScoreDecr = null;
@@ -46,19 +49,17 @@ namespace Robotics.GUI.ViewModel
         RelayCommand _T2MotorPlay = null;
         RelayCommand _T2MotorReturn = null;
 
-        /* Question: any issue with using 'static' in this case? Most of the variables in this window should technically only be created once...
-         * Answer: Proper usage: probably only use static if this variable would be shared across all instances of MainWindowViewModel.
-         * This consideration is probably true for the ArduinoModel, but not the TeamDataModel.  If we want to be technically correct,
-         * we should probably make a MainWindowViewModel constructor so that the TeamDataModel and ArduinoModels can be properly 
-         * instantiated in order. That said, there's no reason to have multiple MainWindows right now, so this distinction is currently 
-         * not important. Static works as is right now because the static objects are created in order of declaration (non-static fields may be created in any order).
-         */
-        public static CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(150));
+        public MainWindowViewModel()
+        {
+
+        }
+
+        public static CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(Constants.defaultGameTime));
 
         public static TeamDataModel Team1 { get; } = new TeamDataModel("Red Team", Countdown, Constants.rplat1, Constants.rplat2, Constants.robs1, Constants.robs2, Constants.rhover,
-                                                                       Constants.rstart, Constants.rmotor1, Constants.rmotor2); //assumption: this is the red team
+            Constants.rstart, Constants.rmotor1, Constants.rmotor2, Properties.Settings.Default.RedMotorFwdTime, Properties.Settings.Default.RedMotorBackTime); //assumption: this is the red team
         public static TeamDataModel Team2 { get; } = new TeamDataModel("Blue Team", Countdown, Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
-                                                                       Constants.bstart, Constants.bmotor1, Constants.bmotor2); //assumption: this is the blue team
+            Constants.bstart, Constants.bmotor1, Constants.bmotor2, Properties.Settings.Default.BlueMotorFwdTime , Properties.Settings.Default.BlueMotorBackTime); //assumption: this is the blue team
         //TODO Research: does this need to be public?
         public static ArduinoModel Arduino { get; } = new ArduinoModel(Team1, Team2);
 
@@ -131,7 +132,17 @@ namespace Robotics.GUI.ViewModel
         public override void OnClosing(object sender, CancelEventArgs e)
         {
             Arduino.CloseConnection();
+            UpdateSettings();
+            Properties.Settings.Default.Save();
             Dispose();
+        }
+
+        private static void UpdateSettings()
+        {
+            Properties.Settings.Default.RedMotorFwdTime = Team1.TeamControl.Motor.ForwardTime;
+            Properties.Settings.Default.RedMotorBackTime = Team1.TeamControl.Motor.BackwardTime;
+            Properties.Settings.Default.BlueMotorFwdTime = Team2.TeamControl.Motor.ForwardTime;
+            Properties.Settings.Default.BlueMotorBackTime = Team2.TeamControl.Motor.BackwardTime;
         }
 
         #region IDisposable Support
