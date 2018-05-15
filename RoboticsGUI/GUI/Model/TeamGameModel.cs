@@ -60,6 +60,7 @@ namespace Robotics.GUI.Model
         private const int hoverTime = 30000; //hover time in total elapsed msecs before absolute end
         private const int obstacleTime = 105000; //obstacle time in total elapsed msecs before absolute end
         private const int platformTime = 150000; //platform time
+        private const double gameTimeTotalMS = Constants.gameTime * 1000; //game time in milliseconds
         //Time left after above times have elapsed
         private double startLeft;
         private double hoverLeft;
@@ -71,8 +72,9 @@ namespace Robotics.GUI.Model
             double timeLeft = _countdown.TimeRemaining.TotalMilliseconds;
             switch (_state)
             {
+                case gameState.PreStart:
                 case gameState.Idle:
-                    if (timeLeft > 0 && timeLeft < _countdown.Timeout.TotalMilliseconds)
+                    if (timeLeft > 0 && timeLeft < gameTimeTotalMS)
                     {
                         _state = gameState.Start;
                         _teamControl.StartLed.Value = true;
@@ -173,11 +175,11 @@ namespace Robotics.GUI.Model
                 _state = gameState.PreStart;
                 _blinkTimer.Start();
             }
-            else if (_state == gameState.PreStart)
+            else if (_state == gameState.PreStart) //toggle off
             {
                 _blinkTimer.Stop();
                 _teamControl.StartLed.Value = false;
-                _state = gameState.Start;
+                _state = gameState.Idle;
             }
         }
 

@@ -55,7 +55,7 @@ namespace Robotics.GUI.ViewModel
 
         }
 
-        public static CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(Constants.defaultGameTime));
+        public static CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(Constants.gameTime));
 
         public static TeamDataModel Team1 { get; } = new TeamDataModel("Red Team", Countdown, Constants.rplat1, Constants.rplat2, Constants.robs1, Constants.robs2, Constants.rhover,
             Constants.rstart, Constants.rmotor1, Constants.rmotor2, Properties.Settings.Default.RedMotorFwdTime, Properties.Settings.Default.RedMotorBackTime); //assumption: this is the red team
@@ -93,7 +93,8 @@ namespace Robotics.GUI.ViewModel
             Team2.Reset();
             //TODO reset scores as well.
         }));
-        RelayCommand PreStartCommand => _cmdPreStart ?? (_cmdPreStart = new RelayCommand(execute => { Team1.TeamGame.PreStart();
+        public RelayCommand PreStartCommand => _cmdPreStart ?? (_cmdPreStart = new RelayCommand(execute => {
+            Team1.TeamGame.PreStart();
             Team2.TeamGame.PreStart(); }, canExecute => { return Arduino.ComOK; }));
 
         //T1 score and sensor control
