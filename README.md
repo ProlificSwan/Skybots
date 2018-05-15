@@ -10,10 +10,10 @@
 9.  Run the game! Details on buttons below:
 
 ### Game Controls
-**Start:** Start/Resume game. Motors and LEDs will be automatically commanded through game states (setup in TeamGameModel.cs)
-**Stop:** Pause game. Motors will stop, LEDs will not change. Press Start to unpause.
-**Reset:** Resets all game state and LED/motor states. Motors will attempt to move back to their starting position before stopping.
-**Pre-Start:** Blinks starting zone LEDs. Press again to turn off or press Start to continue to normal function.
+- **Start:** Start/Resume game. Motors and LEDs will be automatically commanded through game states (setup in TeamGameModel.cs)
+- **Stop:** Pause game. Motors will stop, LEDs will not change. Press Start to unpause.
+- **Reset:** Resets all game state and LED/motor states. Motors will attempt to move back to their starting position before stopping.
+- **Pre-Start:** Blinks starting zone LEDs. Press again to turn off or press Start to continue to normal function.
 
 ### Manual Controls
 **Motor Controls**
