@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
+using Robotics.GUI.Helpers;
 
 namespace Robotics.GUI.Model
 {
@@ -21,15 +23,20 @@ namespace Robotics.GUI.Model
             obstacleLeft = countdown.Timeout.TotalMilliseconds - obstacleTime;
             platformLeft = countdown.Timeout.TotalMilliseconds - platformTime;
             _countdown.PropertyChanged += OnTimeChange;
+            _blinkTimer = new Timer(Constants.preStartBlinkInterval) { AutoReset = true };
+            _blinkTimer.Elapsed += OnBlinkElapsed;
+
         }
 
         private TeamScoreModel _teamScore;
         private TeamControlModel _teamControl;
         private CountdownModel _countdown;
+        private Timer _blinkTimer;
 
         public enum gameState
         {
             Idle,
+            PreStart,
             Start,
             Hover,
             Obstacles,
@@ -48,8 +55,7 @@ namespace Robotics.GUI.Model
                 SetProperty(ref _state, value);
             }
         }
-        //TODO - make times configurable
-
+        //TODO - make game state times configurable
         private const int startTime = 5000; //start time in msecs
         private const int hoverTime = 30000; //hover time in total elapsed msecs before absolute end
         private const int obstacleTime = 105000; //obstacle time in total elapsed msecs before absolute end
@@ -159,5 +165,30 @@ namespace Robotics.GUI.Model
             //Note that TeamControl.Reset() resets motors and lights itself.
         }
 
+        //Toggles pre-start blinking on/off for start leds if game hasn't started yet.
+        public void PreStart()
+        {
+            if (_state == gameState.Idle)
+            {
+                _state = gameState.PreStart;
+                _blinkTimer.Start();
+            }
+            else if (_state == gameState.PreStart)
+            {
+                _blinkTimer.Stop();
+                _teamControl.StartLed.Value = false;
+                _state = gameState.Start;
+            }
+        }
+
+        private void OnBlinkElapsed(object sender, ElapsedEventArgs e)
+        {
+            _teamControl.StartLed.Toggle();
+            if (_state != gameState.PreStart) //This should only happen if start button is pressed during prestart
+            {
+                _teamControl.StartLed.Value = true; 
+                _blinkTimer.Stop();
+            }
+        }
     }
 }

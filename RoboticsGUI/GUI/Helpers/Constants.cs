@@ -39,6 +39,7 @@ namespace Robotics.GUI.Helpers
         public const short bmotor1  = 4;  //Motor1
         public const short bmotor2  = 5;  //Motor2
 
+        public const int preStartBlinkInterval = 250;
         public const short keepAliveLed = 13; //Pin 13 is the built in Arduino pin we are using to physically show communication is OK
         public const int keepAliveInterval = 500; //how often to blink LED in msec
     }

@@ -54,6 +54,11 @@ namespace Robotics.GUI.Model
             this._value = false;
         }
 
+        public void Toggle()
+        {
+            Value = !_value;
+        }
+
         public override bool Equals(object obj)
         {
             var led = obj as LedModel;

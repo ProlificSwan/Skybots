@@ -314,11 +314,11 @@
         <Viewbox Grid.Row="15" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
             <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.TotalScore, Mode=OneWay}" IsReadOnly="True" />
         </Viewbox>
-        <Viewbox Grid.Column="7" Margin="1,7,1,7" Grid.Row="4">
+        <Viewbox Grid.Column="8" Margin="1,7,1,7" Grid.Row="4">
             <Label Content="Start Lights:"  />
         </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="7">
-            <CheckBox  IsChecked="{Binding StartLedUnionProperty}" IsEnabled="{Binding Arduino.ComOK}"/>
+        <Viewbox Grid.Row="4" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="7">
+            <CheckBox  IsChecked="{Binding StartLedUnionProperty, Mode=TwoWay}" IsEnabled="{Binding Arduino.ComOK}"/>
         </Viewbox>
         <Button Content="&lt;--" Grid.Column="7" Margin="17,7,23,5" Grid.Row="9" Command="{Binding T1MotorBack, Mode=OneWay}" />
         <Button Content="--&gt;" Grid.Column="9" Margin="17,7,23,5" Grid.Row="9" Command="{Binding T1MotorFwd, Mode=OneWay}"/>
@@ -339,5 +339,6 @@
         <Button Content="Force Stop" Grid.Column="8" Grid.Row="13" Command="{Binding T2MotorStop, Mode=OneWay}" Margin="0,0,0,2"/>
         <Button Content="Test Pause" Grid.Column="9" Grid.Row="14" Grid.ColumnSpan="2" Margin="1,0,20,0" Command="{Binding T2MotorPause}"/>
         <Label Content="T2 Motor Control" Grid.Column="7" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="12" Width="100" Grid.ColumnSpan="3"/>
+        <Button Grid.Row="4" Grid.Column="7" Content="Pre-Start" Margin="6" Command="{Binding PreStartCommand, Mode=OneWay}" IsEnabled="{Binding Arduino.ComOK}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
     </Grid>
 </Window>
