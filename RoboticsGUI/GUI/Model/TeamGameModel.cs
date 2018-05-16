@@ -18,10 +18,10 @@ namespace Robotics.GUI.Model
 
             //time event setup
             _countdown = countdown;
-            startLeft = countdown.Timeout.TotalMilliseconds - startTime;
-            hoverLeft = countdown.Timeout.TotalMilliseconds - hoverTime;
-            obstacleLeft = countdown.Timeout.TotalMilliseconds - obstacleTime;
-            platformLeft = countdown.Timeout.TotalMilliseconds - platformTime;
+            startLeft = countdown.Timeout.TotalMilliseconds - Constants.startTime;
+            hoverLeft = countdown.Timeout.TotalMilliseconds - Constants.hoverTime;
+            obstacleLeft = countdown.Timeout.TotalMilliseconds - Constants.obstacleTime;
+            platformLeft = countdown.Timeout.TotalMilliseconds - Constants.platformTime;
             _countdown.PropertyChanged += OnTimeChange;
             _blinkTimer = new Timer(Constants.preStartBlinkInterval) { AutoReset = true };
             _blinkTimer.Elapsed += OnBlinkElapsed;
@@ -55,13 +55,9 @@ namespace Robotics.GUI.Model
                 SetProperty(ref _state, value);
             }
         }
-        //TODO - make game state times configurable
-        private const int startTime = 5000; //start time in msecs
-        private const int hoverTime = 30000; //hover time in total elapsed msecs before absolute end
-        private const int obstacleTime = 105000; //obstacle time in total elapsed msecs before absolute end
-        private const int platformTime = 150000; //platform time
+
         private const double gameTimeTotalMS = Constants.gameTime * 1000; //game time in milliseconds
-        //Time left after above times have elapsed
+        //Time left after associated times have elapsed
         private double startLeft;
         private double hoverLeft;
         private double obstacleLeft;

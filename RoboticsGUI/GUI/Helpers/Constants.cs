@@ -11,7 +11,14 @@ namespace Robotics.GUI.Helpers
         //Default time motors spend moving in each direction.
         public const int defaultMotorFwdTime = 1000; //milliseconds.
         public const int defaultMotorBackTime = 1000; //milliseconds.
+
+        //game time variables
         public const int gameTime = 150; //total game time in seconds - may change this to be configurable later
+        //time variables below should indicate the time when that item must finish by. Order of states is covered in TeamGameModel.
+        public const int startTime = 5000; //start time in msecs
+        public const int hoverTime = 30000; //hover time in total elapsed msecs before absolute end
+        public const int obstacleTime = 120000; //obstacle time in total elapsed msecs before absolute end
+        public const int platformTime = 150000; //platform time
 
         //Scoring increments for the scoring areas.
         public const uint platInc = 100; //Not sure which platform is the larger one, so use 100 increment for now.
@@ -39,7 +46,7 @@ namespace Robotics.GUI.Helpers
         public const short bmotor1  = 4;  //Motor1
         public const short bmotor2  = 5;  //Motor2
 
-        public const int preStartBlinkInterval = 50;
+        public const int preStartBlinkInterval = 75;
         public const short keepAliveLed = 13; //Pin 13 is the built in Arduino pin we are using to physically show communication is OK
         public const int keepAliveInterval = 500; //how often to blink LED in msec
     }
