@@ -22,6 +22,13 @@ namespace Robotics.GUI.View
         public MatchUpsWindow()
         {
             InitializeComponent();
+
+            Grid newGrid=(Grid)this.GridWithSchoolNames;
+            Label label = new Label();
+            label.Content = "School test";
+            label.SetValue(Grid.ColumnProperty,4);
+            newGrid.Children.Add(label);
+
         }
 
         private void checkBox1_Click(object sender, RoutedEventArgs e)

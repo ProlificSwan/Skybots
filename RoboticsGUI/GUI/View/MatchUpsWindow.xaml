@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:ViewModel="clr-namespace:Robotics.GUI.ViewModel" 
+        Background="{DynamicResource ResourceKey=NormalBrush}"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Robotics.GUI.View"
         mc:Ignorable="d"
@@ -12,97 +13,103 @@
  <!-- 
     Window property for black background
      Background="{DynamicResource ResourceKey=NormalBrush}" 
-    
+   --> 
     <Window.Resources>
         <ResourceDictionary Source="../Themes/ExpressionDark.xaml" />
-    </Window.Resources> -->
+    </Window.Resources> 
 
     <Window.DataContext>
         <ViewModel:MainWindowViewModel />
     </Window.DataContext>
 
     <Border Padding="10">
+        
         <StackPanel>
 
-            <Grid Margin="10 10 10 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    
-                </Grid.ColumnDefinitions>
+            <ScrollViewer>
+                <StackPanel>
 
-                <TextBlock  Grid.Column="0"  Margin="0 0 10 0" Text="Click and Check the Box"/>
-                
-                <TextBlock  Grid.Column="1" Margin="0 0 10 0" Text="Team1"/>
+                    <Grid Margin="10 10 10 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
 
-                <TextBlock  Grid.Column="2"  Margin="0 0 10 0" Text="Team2"/>
+                        </Grid.ColumnDefinitions>
 
-                <TextBlock  Grid.Column="3"  Margin="0 0 10 0" Text="Team3"/>
+                        <Label  Grid.Column="0"  Margin="0 0 10 0" Content="Click and Check the Box"/>
 
-                <TextBlock  Grid.Column="4"  Margin="0 0 10 0" Text="Team4"/>
+                        <Label  Grid.Column="1" Margin="0 0 10 0" Content="Team1"/>
 
+                        <Label  Grid.Column="2"  Margin="0 0 10 0" Content="Team2"/>
 
+                        <Label  Grid.Column="3"  Margin="0 0 10 0" Content="Team3"/>
 
-            </Grid>
-
-
-            <Grid Margin="10 0 10 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-
-                </Grid.ColumnDefinitions>
-
-                <!--<CheckBox  Grid.Column="0"  Margin="0 0 10 0"  x:Name="checkBox1" Click="checkBox1_Click" />-->
-
-                <RadioButton Grid.Column="0" GroupName="MyGroup"  />
-                
-                <TextBlock  Grid.Column="1" Margin="0 0 10 0" Text="School1"/>
-
-                <TextBlock  Grid.Column="2"  Margin="0 0 10 0" Text="School2"/>
-
-                <TextBlock  Grid.Column="3"  Margin="0 0 10 0" Text="School3"/>
-
-                <TextBlock  Grid.Column="4"  Margin="0 0 10 0" Text="School4"/>
+                        <Label  Grid.Column="4"  Margin="0 0 10 0" Content="Team4"/>
 
 
 
-            </Grid>
+                    </Grid>
 
 
-            <Grid Margin="10 0 10 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <Grid Margin="10 0 10 10" x:Name="GridWithSchoolNames">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
 
-                </Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
 
-                <!--<CheckBox  Grid.Column="0"  Margin="0 0 10 0"  x:Name="checkBox2" Click="checkBox1_Click" /> -->
-                <RadioButton Grid.Column="0" GroupName="MyGroup"  />
-                <TextBlock  Grid.Column="1" Margin="0 0 10 0" Text="School5"/>
+                        <!--<CheckBox  Grid.Column="0"  Margin="0 0 10 0"  x:Name="checkBox1" Click="checkBox1_Click" />-->
 
-                <TextBlock  Grid.Column="2"  Margin="0 0 10 0" Text="School6"/>
+                        <RadioButton Grid.Column="0" GroupName="MyGroup"  />
 
-                <TextBlock  Grid.Column="3"  Margin="0 0 10 0" Text="School7"/>
+                        <Label  Grid.Column="1" Margin="0 0 10 0" Content="School1"/>
 
-                <TextBlock  Grid.Column="4"  Margin="0 0 10 0" Text="School8"/>
+                        <Label  Grid.Column="2"  Margin="0 0 10 0" Content="School2"/>
+
+                        <Label  Grid.Column="3"  Margin="0 0 10 0" Content="School3"/>
+
+                        <!-- <Label  Grid.Column="4"  Margin="0 0 10 0" Content="School4"/>-->
 
 
 
-            </Grid>
+                    </Grid>
 
+
+                    <Grid Margin="10 0 10 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <!--<CheckBox  Grid.Column="0"  Margin="0 0 10 0"  x:Name="checkBox2" Click="checkBox1_Click" /> -->
+                        <RadioButton Grid.Column="0" GroupName="MyGroup"  />
+                        <Label  Grid.Column="1" Margin="0 0 10 0" Content="School5"/>
+
+                        <Label  Grid.Column="2"  Margin="0 0 10 0" Content="School6"/>
+
+                        <Label  Grid.Column="3"  Margin="0 0 10 0" Content="School7"/>
+
+                        <Label  Grid.Column="4"  Margin="0 0 10 0" Content="School8"/>
+
+
+
+                    </Grid>
+
+                </StackPanel>
+            </ScrollViewer>
             <Grid Margin="10 0 10 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -125,10 +132,20 @@
 
             </Grid>
 
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
 
 
-            <TextBox DataContext="{Binding Countdown}" Text="{Binding TimeRemaining, StringFormat=mm\\:ss\\:fff, Mode=OneWay}"  IsReadOnly="True"  />
+                </Grid.ColumnDefinitions>
+                <Viewbox  Grid.Column="1"  >
+                <TextBox DataContext="{Binding Countdown}" Text="{Binding TimeRemaining, StringFormat=mm\\:ss\\:fff, Mode=OneWay}"  IsReadOnly="True"  />
+            </Viewbox>
 
+            </Grid>
         </StackPanel>
 
     </Border>
