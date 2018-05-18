@@ -62,7 +62,7 @@ namespace Robotics.GUI.Model
         //force LED to turn off if this function is called, even if believed current value is already false.
         public void Reset()
         {
-            _value = false;
+            Value = false;
             OnPropertyChanged();
         }
 
