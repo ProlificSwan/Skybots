@@ -43,5 +43,10 @@ namespace Robotics.GUI.Model
             return Score;
         }
 
+        public void Reset()
+        {
+            Score = 0;
+        }
+
     }
 }

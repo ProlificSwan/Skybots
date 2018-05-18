@@ -57,9 +57,9 @@ namespace Robotics.GUI.ViewModel
 
         public static CountdownModel Countdown { get; } = new CountdownModel(TimeSpan.FromSeconds(Constants.gameTime));
 
-        public static TeamDataModel Team1 { get; } = new TeamDataModel("Red Team", Countdown, Constants.rplat1, Constants.rplat2, Constants.robs1, Constants.robs2, Constants.rhover,
+        public static TeamDataModel Team1 { get; } = new TeamDataModel("Red Alliance", Countdown, Constants.rplat1, Constants.rplat2, Constants.robs1, Constants.robs2, Constants.rhover,
             Constants.rstart, Constants.rmotor1, Constants.rmotor2, Properties.Settings.Default.RedMotorFwdTime, Properties.Settings.Default.RedMotorBackTime); //assumption: this is the red team
-        public static TeamDataModel Team2 { get; } = new TeamDataModel("Blue Team", Countdown, Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
+        public static TeamDataModel Team2 { get; } = new TeamDataModel("Blue Alliance", Countdown, Constants.bplat1, Constants.bplat2, Constants.bobs1, Constants.bobs2, Constants.bhover,
             Constants.bstart, Constants.bmotor1, Constants.bmotor2, Properties.Settings.Default.BlueMotorFwdTime, Properties.Settings.Default.BlueMotorBackTime); //assumption: this is the blue team
         //TODO Research: does this need to be public?
         public static ArduinoModel Arduino { get; } = new ArduinoModel(Team1, Team2);
@@ -135,6 +135,8 @@ namespace Robotics.GUI.ViewModel
 
         public override void OnClosing(object sender, CancelEventArgs e)
         {
+            Team1.Shutdown();
+            Team2.Shutdown();
             Arduino.CloseConnection();
             UpdateSettings();
             Properties.Settings.Default.Save();

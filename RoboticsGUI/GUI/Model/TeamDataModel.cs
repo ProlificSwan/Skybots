@@ -65,8 +65,13 @@ namespace Robotics.GUI.Model
         {
             TeamGame.Reset();
             TeamControl.Reset();
-            //TODO determine requirement for changing scores on game reset.
-            //TeamScore.Reset();  
+            TeamScore.Reset();  
+        }
+
+        public void Shutdown()
+        {
+            TeamGame.Reset();
+            TeamControl.Shutdown();
         }
     }
 }

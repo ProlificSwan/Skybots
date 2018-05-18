@@ -39,15 +39,28 @@ namespace Robotics.GUI.Model
         public LedModel HoverLed { get; }
         public LedModel StartLed { get; }
 
+        //Turn off all lights and reset motor to the "start" position
         public void Reset()
         {
-            Platform1Led.Value = false;
-            Platform2Led.Value = false;
-            Obstacle1Led.Value = false;
-            Obstacle2Led.Value = false;
-            HoverLed.Value = false;
-            StartLed.Value = false;
+            Platform1Led.Reset();
+            Platform2Led.Reset();
+            Obstacle1Led.Reset();
+            Obstacle2Led.Reset();
+            HoverLed.Reset();
+            StartLed.Reset();
             Motor.RollingStop();
+        }
+
+        //Immediately shutdown all controllable items
+        public void Shutdown()
+        {
+            Platform1Led.Reset();
+            Platform2Led.Reset();
+            Obstacle1Led.Reset();
+            Obstacle2Led.Reset();
+            HoverLed.Reset();
+            StartLed.Reset();
+            Motor.EmergencyStop();
         }
     }
 }

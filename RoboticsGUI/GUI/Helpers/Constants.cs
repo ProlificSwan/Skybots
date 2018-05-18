@@ -21,7 +21,8 @@ namespace Robotics.GUI.Helpers
         public const int platformTime = 150000; //platform time
 
         //Scoring increments for the scoring areas.
-        public const uint platInc = 100; //Not sure which platform is the larger one, so use 100 increment for now.
+        public const uint plat1Inc = 300; //high platform 
+        public const uint plat2Inc = 200; //low platform
         public const uint obs1Inc = 20; // Moving obstacle
         public const uint obs2Inc = 10; // Fixed obstacle
         public const uint hoverInc = 50; // Hover

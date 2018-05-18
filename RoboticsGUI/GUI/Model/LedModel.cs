@@ -59,6 +59,13 @@ namespace Robotics.GUI.Model
             Value = !_value;
         }
 
+        //force LED to turn off if this function is called, even if believed current value is already false.
+        public void Reset()
+        {
+            _value = false;
+            OnPropertyChanged();
+        }
+
         public override bool Equals(object obj)
         {
             var led = obj as LedModel;
