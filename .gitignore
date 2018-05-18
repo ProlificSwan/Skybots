@@ -3,4 +3,4 @@
 **/Release/*
 TODO.txt
 **/obj/*
-!**/Release/*.exe
+!**/Release/*
