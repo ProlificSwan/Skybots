@@ -36,6 +36,8 @@ namespace Robotics.GUI.Helpers
         public const short rstart   = 32; //Start
         public const short rmotor1  = 2;  //Motor1
         public const short rmotor2  = 3;  //Motor2
+        public const short rlimf    = 34; //Front Limit Switch
+        public const short rlimb    = 35; //Back Limit Switch
 
         //Blue Team Control Pins
         public const short bplat1   = 23; //Platform 1
@@ -46,8 +48,11 @@ namespace Robotics.GUI.Helpers
         public const short bstart   = 33; //Start
         public const short bmotor1  = 4;  //Motor1
         public const short bmotor2  = 5;  //Motor2
+        public const short blimf = 34; //Front Limit Switch
+        public const short blimb = 35; //Back Limit Switch
 
-        public const int preStartBlinkInterval = 75;
+
+    public const int preStartBlinkInterval = 75;
         public const short keepAliveLed = 13; //Pin 13 is the built in Arduino pin we are using to physically show communication is OK
         public const int keepAliveInterval = 500; //how often to blink LED in msec
     }

@@ -17,328 +17,333 @@
  Cursor="Arrow"
  Background="{DynamicResource ResourceKey=NormalBrush}"
  ResizeMode="CanResize">
-    <Window.Resources>
-        <ResourceDictionary Source="../Themes/ExpressionDark.xaml" />
-    </Window.Resources>
-    <Window.DataContext>
-        <ViewModel:MainWindowViewModel />
-    </Window.DataContext>
-    <Grid x:Name="grid" Margin="10,10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <Viewbox Grid.ColumnSpan="5" >
-            <Label Content="{Binding Team1.Name}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="1" Margin="5" >
-            <Label Content="On" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="2" Margin="5" >
-            <Label Content="Off" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Margin="5" >
-            <Label Content="Lights" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        </Viewbox>
-        <Viewbox Grid.Row="2" Margin="5">
-            <Label Content="Hover" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="1" Margin="5">
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1H" IsChecked="{Binding Team1.TeamScoringMethod.Hover.IsEnabled}"/>
-        </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="2" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1H" />
-        </Viewbox>
-        <Button Grid.Row="2" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1HoverIncr, Mode=OneWay}" />
-        <Button Grid.Row="2" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1HoverDecr, Mode=OneWay}" />
-        <CheckBox Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.HoverLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="3" Margin="5" >
-            <Label Content="LZN-4" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="3" Grid.Column="1" Margin="5">
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1P1" IsChecked="{Binding Team1.TeamScoringMethod.Platform1.IsEnabled}" />
-        </Viewbox>
-        <Viewbox Grid.Row="3" Grid.Column="2" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1P1" />
-        </Viewbox>
-        <Button Grid.Row="3" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat1Incr, Mode=OneWay}" />
-        <Button Grid.Row="3" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Platform1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="4" Margin="5">
-            <Label Content="LZN-2" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="1" Margin="5">
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1P2" IsChecked="{Binding Team1.TeamScoringMethod.Platform2.IsEnabled}"  />
-        </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="2" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1P2" />
-        </Viewbox>
-        <Button Grid.Row="4" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat2Incr, Mode=OneWay}" />
-        <Button Grid.Row="4" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Platform2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="5" Margin="5" >
-            <Label Content="ObsM" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="5" Grid.Column="1" Margin="5">
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1O1" IsChecked="{Binding Team1.TeamScoringMethod.Obstacle1.IsEnabled}" />
-        </Viewbox>
-        <Viewbox Grid.Row="5" Grid.Column="2" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1O1" />
-        </Viewbox>
-        <Button Grid.Row="5" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs1Incr, Mode=OneWay}" />
-        <Button Grid.Row="5" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Obstacle1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="6" Margin="5">
-            <Label Content="ObsS" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="6" Grid.Column="1" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1O2" IsChecked="{Binding Team1.TeamScoringMethod.Obstacle2.IsEnabled}"  />
-        </Viewbox>
-        <Viewbox Grid.Row="6" Grid.Column="2" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1O2" />
-        </Viewbox>
-        <Button Grid.Row="6" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs2Incr, Mode=OneWay}" />
-        <Button Grid.Row="6" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Obstacle2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="7" Margin="5">
-            <Label Content="Start" Width="35" />
-        </Viewbox>
-        <CheckBox Grid.Row="7" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.StartLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="9" Margin="5" >
-            <Label Width="35" Content="Hover" />
-        </Viewbox>
-        <Viewbox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1">
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team1.TeamScore.Hover.Score}" />
-        </Viewbox>
+  <Window.Resources>
+    <ResourceDictionary Source="../Themes/ExpressionDark.xaml" />
+  </Window.Resources>
+  <Window.DataContext>
+    <ViewModel:MainWindowViewModel />
+  </Window.DataContext>
+  <Grid x:Name="grid" Margin="10,10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*"/>
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="1*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="2*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="2*" />
+      <ColumnDefinition Width="2*" />
+      <ColumnDefinition Width="2*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="2*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+    </Grid.ColumnDefinitions>
+    <Viewbox Grid.ColumnSpan="5" >
+      <Label Content="{Binding Team1.Name}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+    </Viewbox>
+    <Viewbox Grid.Row="1" Grid.Column="1" Margin="5" >
+      <Label Content="On" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </Viewbox>
+    <Viewbox Grid.Row="1" Grid.Column="2" Margin="5" >
+      <Label Content="Off" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </Viewbox>
+    <Viewbox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Margin="5" >
+      <Label Content="Lights" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </Viewbox>
+    <Viewbox Grid.Row="2" Margin="5">
+      <Label Content="Hover" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="2" Grid.Column="1" Margin="5">
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1H" IsChecked="{Binding Team1.TeamScoringMethod.Hover.IsEnabled}"/>
+    </Viewbox>
+    <Viewbox Grid.Row="2" Grid.Column="2" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1H" />
+    </Viewbox>
+    <Button Grid.Row="2" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1HoverIncr, Mode=OneWay}" />
+    <Button Grid.Row="2" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1HoverDecr, Mode=OneWay}" />
+    <CheckBox Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.HoverLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="3" Margin="5" >
+      <Label Content="LZN-4" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="3" Grid.Column="1" Margin="5">
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1P1" IsChecked="{Binding Team1.TeamScoringMethod.Platform1.IsEnabled}" />
+    </Viewbox>
+    <Viewbox Grid.Row="3" Grid.Column="2" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1P1" />
+    </Viewbox>
+    <Button Grid.Row="3" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat1Incr, Mode=OneWay}" />
+    <Button Grid.Row="3" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat1Decr, Mode=OneWay}" />
+    <CheckBox Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Platform1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="4" Margin="5">
+      <Label Content="LZN-2" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="4" Grid.Column="1" Margin="5">
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1P2" IsChecked="{Binding Team1.TeamScoringMethod.Platform2.IsEnabled}"  />
+    </Viewbox>
+    <Viewbox Grid.Row="4" Grid.Column="2" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1P2" />
+    </Viewbox>
+    <Button Grid.Row="4" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Plat2Incr, Mode=OneWay}" />
+    <Button Grid.Row="4" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Plat2Decr, Mode=OneWay}" />
+    <CheckBox Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Platform2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="5" Margin="5" >
+      <Label Content="ObsM" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="5" Grid.Column="1" Margin="5">
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1O1" IsChecked="{Binding Team1.TeamScoringMethod.Obstacle1.IsEnabled}" />
+    </Viewbox>
+    <Viewbox Grid.Row="5" Grid.Column="2" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1O1" />
+    </Viewbox>
+    <Button Grid.Row="5" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs1Incr, Mode=OneWay}" />
+    <Button Grid.Row="5" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs1Decr, Mode=OneWay}" />
+    <CheckBox Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Obstacle1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="6" Margin="5">
+      <Label Content="ObsS" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="6" Grid.Column="1" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1O2" IsChecked="{Binding Team1.TeamScoringMethod.Obstacle2.IsEnabled}"  />
+    </Viewbox>
+    <Viewbox Grid.Row="6" Grid.Column="2" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T1O2" />
+    </Viewbox>
+    <Button Grid.Row="6" Grid.Column="3" Content="+" Margin="7" Command="{Binding T1Obs2Incr, Mode=OneWay}" />
+    <Button Grid.Row="6" Grid.Column="4" Content="-" Margin="7" Command="{Binding T1Obs2Decr, Mode=OneWay}" />
+    <CheckBox Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.Obstacle2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="7" Margin="5">
+      <Label Content="Start" Width="35" />
+    </Viewbox>
+    <CheckBox Grid.Row="7" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.StartLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="9" Margin="5" >
+      <Label Width="35" Content="Hover" />
+    </Viewbox>
+    <Viewbox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1">
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team1.TeamScore.Hover.Score}" />
+    </Viewbox>
 
-        <Viewbox Grid.Row="10" Margin="5" >
-            <Label Width="35" Content="LZN-4" />
-        </Viewbox>
-        <Viewbox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1">
-            <TextBox HorizontalContentAlignment="Center" Width="90"  Text="{Binding Team1.TeamScore.Platform1.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Row="10" Margin="5" >
+      <Label Width="35" Content="LZN-4" />
+    </Viewbox>
+    <Viewbox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1">
+      <TextBox HorizontalContentAlignment="Center" Width="90"  Text="{Binding Team1.TeamScore.Platform1.Score}" />
+    </Viewbox>
 
-        <Viewbox Grid.Row="11" Margin="5" >
-            <Label Width="35" Content="LZN-2" />
-        </Viewbox>
-        <Viewbox Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1">
-            <TextBox HorizontalContentAlignment="Center" Width="90"  Text="{Binding Team1.TeamScore.Platform2.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Row="11" Margin="5" >
+      <Label Width="35" Content="LZN-2" />
+    </Viewbox>
+    <Viewbox Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1">
+      <TextBox HorizontalContentAlignment="Center" Width="90"  Text="{Binding Team1.TeamScore.Platform2.Score}" />
+    </Viewbox>
 
-        <Viewbox Grid.Row="12" Margin="5" >
-            <Label Width="35" Content="ObsM" />
-        </Viewbox>
-        <Viewbox Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1" >
-            <TextBox HorizontalContentAlignment="Center" Width="90"   Text="{Binding Team1.TeamScore.Obstacle1.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Row="12" Margin="5" >
+      <Label Width="35" Content="ObsM" />
+    </Viewbox>
+    <Viewbox Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1" >
+      <TextBox HorizontalContentAlignment="Center" Width="90"   Text="{Binding Team1.TeamScore.Obstacle1.Score}" />
+    </Viewbox>
 
-        <Viewbox Grid.Row="13" Margin="5" >
-            <Label Width="35" Content="ObsS" />
-        </Viewbox>
-        <Viewbox Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1" >
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team1.TeamScore.Obstacle2.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Row="13" Margin="5" >
+      <Label Width="35" Content="ObsS" />
+    </Viewbox>
+    <Viewbox Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1" >
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team1.TeamScore.Obstacle2.Score}" />
+    </Viewbox>
 
-        <Rectangle Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="4" Fill="AliceBlue" Height="1" Margin="0,5" />
+    <Rectangle Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="4" Fill="AliceBlue" Height="1" Margin="0,5" />
 
-        <Viewbox Grid.Row="15" Margin="5" >
-            <Label Width="35" Content="Total" />
-        </Viewbox>
-        <Viewbox Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1" >
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team1.TeamScore.TotalScore, Mode=OneWay}" IsReadOnly="True" />
-        </Viewbox>
+    <Viewbox Grid.Row="15" Margin="5" >
+      <Label Width="35" Content="Total" />
+    </Viewbox>
+    <Viewbox Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,1" >
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team1.TeamScore.TotalScore, Mode=OneWay}" IsReadOnly="True" />
+    </Viewbox>
 
-        <Rectangle Grid.RowSpan="{Binding RowDefinitions.Count, ElementName=grid, Mode=OneWay}" Grid.Column="6" Fill="AliceBlue" Width="1" Margin="10,0" />
+    <Rectangle Grid.RowSpan="{Binding RowDefinitions.Count, ElementName=grid, Mode=OneWay}" Grid.Column="6" Fill="AliceBlue" Width="1" Margin="10,0" />
 
-        <Viewbox Grid.Column="7" Grid.ColumnSpan="3">
-            <Label Content="Time" />
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.RowSpan="2" Grid.Column="7" Grid.ColumnSpan="3" Margin="10,0">
-            <TextBox DataContext="{Binding Countdown}" Text="{Binding TimeRemaining, StringFormat=mm\\:ss\\:fff, Mode=OneWay}"  IsReadOnly="True"  />
-        </Viewbox>
-        <Button Grid.Row="3" Grid.Column="7" Content="Start" Margin="7" Command="{Binding StartCommand}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        <Button Grid.Row="3" Grid.Column="8" Content="Stop" Margin="7" Command="{Binding StopCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Button Grid.Row="3" Grid.Column="9" Content="Reset" Margin="7" Command="{Binding ResetCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Button Grid.Row="4" Grid.Column="7" Content="Pre-Start" Margin="6" Command="{Binding PreStartCommand}" IsEnabled="{Binding Arduino.ComOK}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        <Viewbox Grid.Column="6" Grid.Row="4" Grid.ColumnSpan="2"/>
-        <Rectangle Grid.RowSpan="{Binding RowDefinitions.Count, ElementName=grid, Mode=OneWay}" Grid.Column="10" Fill="AliceBlue" Width="1" Margin="10,0" />
+    <Viewbox Grid.Column="7" Grid.ColumnSpan="3">
+      <Label Content="Time" />
+    </Viewbox>
+    <Viewbox Grid.Row="1" Grid.RowSpan="2" Grid.Column="7" Grid.ColumnSpan="3" Margin="10,0">
+      <TextBox DataContext="{Binding Countdown}" Text="{Binding TimeRemaining, StringFormat=mm\\:ss\\:fff, Mode=OneWay}"  IsReadOnly="True"  />
+    </Viewbox>
+    <Button Grid.Row="3" Grid.Column="7" Content="Start" Margin="7" Command="{Binding StartCommand}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+    <Button Grid.Row="3" Grid.Column="8" Content="Stop" Margin="7" Command="{Binding StopCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+    <Button Grid.Row="3" Grid.Column="9" Content="Reset" Margin="7" Command="{Binding ResetCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+    <Button Grid.Row="4" Grid.Column="7" Content="Pre-Start" Margin="6" Command="{Binding PreStartCommand}" IsEnabled="{Binding Arduino.ComOK}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+    <Viewbox Grid.Column="6" Grid.Row="4" Grid.ColumnSpan="2"/>
+    <Rectangle Grid.RowSpan="{Binding RowDefinitions.Count, ElementName=grid, Mode=OneWay}" Grid.Column="10" Fill="AliceBlue" Width="1" Margin="10,0" />
 
-        <Viewbox Grid.Column="11" Grid.ColumnSpan="5" >
-            <Label Content="{Binding Team2.Name}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="12" Margin="5" >
-            <Label Content="On" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="13" Margin="5" >
-            <Label Content="Off" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="15" Grid.ColumnSpan="2" Margin="5" >
-            <Label Content="Lights" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="11" Margin="5">
-            <Label Content="Hover" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="12" Margin="5">
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2H" IsChecked="{Binding Team2.TeamScoringMethod.Hover.IsEnabled}" />
-        </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="13" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2H" />
-        </Viewbox>
-        <Button Grid.Row="2" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2HoverIncr, Mode=OneWay}" />
-        <Button Grid.Row="2" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2HoverDecr, Mode=OneWay}" />
-        <CheckBox Grid.Row="2" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.HoverLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="3" Grid.Column="11" Margin="5" >
-            <Label Content="LZN-4" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="3" Grid.Column="12" Margin="5">
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P1" IsChecked="{Binding Team2.TeamScoringMethod.Platform1.IsEnabled}" />
-        </Viewbox>
-        <Viewbox Grid.Row="3" Grid.Column="13" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P1" />
-        </Viewbox>
-        <Button Grid.Row="3" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat1Incr, Mode=OneWay}" />
-        <Button Grid.Row="3" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="3" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Platform1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="4" Grid.Column="11" Margin="5">
-            <Label Content="LZN-2" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="12" Margin="5">
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P2" IsChecked="{Binding Team2.TeamScoringMethod.Platform2.IsEnabled}" />
-        </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="13" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P2" />
-        </Viewbox>
-        <Button Grid.Row="4" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat2Incr, Mode=OneWay}" />
-        <Button Grid.Row="4" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="4" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Platform2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="5" Grid.Column="11" Margin="5" >
-            <Label Content="ObsM" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="5" Grid.Column="12" Margin="5">
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O1" IsChecked="{Binding Team2.TeamScoringMethod.Obstacle1.IsEnabled}" />
-        </Viewbox>
-        <Viewbox Grid.Row="5" Grid.Column="13" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O1" />
-        </Viewbox>
-        <Button Grid.Row="5" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs1Incr, Mode=OneWay}" />
-        <Button Grid.Row="5" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs1Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="5" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Obstacle1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="6" Grid.Column="11" Margin="5">
-            <Label Content="ObsS" Width="35" />
-        </Viewbox>
-        <Viewbox Grid.Row="6" Grid.Column="12" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O2" IsChecked="{Binding Team2.TeamScoringMethod.Obstacle2.IsEnabled}" />
-        </Viewbox>
-        <Viewbox Grid.Row="6" Grid.Column="13" Margin="5" >
-            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O2" />
-        </Viewbox>
-        <Button Grid.Row="6" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs2Incr, Mode=OneWay}" />
-        <Button Grid.Row="6" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs2Decr, Mode=OneWay}" />
-        <CheckBox Grid.Row="6" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Obstacle2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="7" Grid.Column="11" Margin="5">
-            <Label Content="Start" Width="35" />
-        </Viewbox>
-        <CheckBox Grid.Row="7" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.StartLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
-        <Viewbox Grid.Row="9" Grid.Column="11" Margin="5" >
-            <Label Width="35" Content="Hover" />
-        </Viewbox>
-        <Viewbox Grid.Row="9" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Hover.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Column="11" Grid.ColumnSpan="5" >
+      <Label Content="{Binding Team2.Name}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+    </Viewbox>
+    <Viewbox Grid.Row="1" Grid.Column="12" Margin="5" >
+      <Label Content="On" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </Viewbox>
+    <Viewbox Grid.Row="1" Grid.Column="13" Margin="5" >
+      <Label Content="Off" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </Viewbox>
+    <Viewbox Grid.Row="1" Grid.Column="15" Grid.ColumnSpan="2" Margin="5" >
+      <Label Content="Lights" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </Viewbox>
+    <Viewbox Grid.Row="2" Grid.Column="11" Margin="5">
+      <Label Content="Hover" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="2" Grid.Column="12" Margin="5">
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2H" IsChecked="{Binding Team2.TeamScoringMethod.Hover.IsEnabled}" />
+    </Viewbox>
+    <Viewbox Grid.Row="2" Grid.Column="13" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2H" />
+    </Viewbox>
+    <Button Grid.Row="2" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2HoverIncr, Mode=OneWay}" />
+    <Button Grid.Row="2" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2HoverDecr, Mode=OneWay}" />
+    <CheckBox Grid.Row="2" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.HoverLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="3" Grid.Column="11" Margin="5" >
+      <Label Content="LZN-4" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="3" Grid.Column="12" Margin="5">
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P1" IsChecked="{Binding Team2.TeamScoringMethod.Platform1.IsEnabled}" />
+    </Viewbox>
+    <Viewbox Grid.Row="3" Grid.Column="13" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P1" />
+    </Viewbox>
+    <Button Grid.Row="3" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat1Incr, Mode=OneWay}" />
+    <Button Grid.Row="3" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat1Decr, Mode=OneWay}" />
+    <CheckBox Grid.Row="3" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Platform1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="4" Grid.Column="11" Margin="5">
+      <Label Content="LZN-2" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="4" Grid.Column="12" Margin="5">
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P2" IsChecked="{Binding Team2.TeamScoringMethod.Platform2.IsEnabled}" />
+    </Viewbox>
+    <Viewbox Grid.Row="4" Grid.Column="13" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2P2" />
+    </Viewbox>
+    <Button Grid.Row="4" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Plat2Incr, Mode=OneWay}" />
+    <Button Grid.Row="4" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Plat2Decr, Mode=OneWay}" />
+    <CheckBox Grid.Row="4" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Platform2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="5" Grid.Column="11" Margin="5" >
+      <Label Content="ObsM" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="5" Grid.Column="12" Margin="5">
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O1" IsChecked="{Binding Team2.TeamScoringMethod.Obstacle1.IsEnabled}" />
+    </Viewbox>
+    <Viewbox Grid.Row="5" Grid.Column="13" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O1" />
+    </Viewbox>
+    <Button Grid.Row="5" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs1Incr, Mode=OneWay}" />
+    <Button Grid.Row="5" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs1Decr, Mode=OneWay}" />
+    <CheckBox Grid.Row="5" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Obstacle1Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="6" Grid.Column="11" Margin="5">
+      <Label Content="ObsS" Width="35" />
+    </Viewbox>
+    <Viewbox Grid.Row="6" Grid.Column="12" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O2" IsChecked="{Binding Team2.TeamScoringMethod.Obstacle2.IsEnabled}" />
+    </Viewbox>
+    <Viewbox Grid.Row="6" Grid.Column="13" Margin="5" >
+      <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" GroupName="T2O2" />
+    </Viewbox>
+    <Button Grid.Row="6" Grid.Column="14" Content="+" Margin="7" Command="{Binding T2Obs2Incr, Mode=OneWay}" />
+    <Button Grid.Row="6" Grid.Column="15" Content="-" Margin="7" Command="{Binding T2Obs2Decr, Mode=OneWay}" />
+    <CheckBox Grid.Row="6" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.Obstacle2Led.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="7" Grid.Column="11" Margin="5">
+      <Label Content="Start" Width="35" />
+    </Viewbox>
+    <CheckBox Grid.Row="7" Grid.Column="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.StartLed.Value}" IsEnabled="{Binding Arduino.ComOK}"/>
+    <Viewbox Grid.Row="9" Grid.Column="11" Margin="5" >
+      <Label Width="35" Content="Hover" />
+    </Viewbox>
+    <Viewbox Grid.Row="9" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Hover.Score}" />
+    </Viewbox>
 
-        <Viewbox Grid.Row="10" Grid.Column="11" Margin="5" >
-            <Label Width="35" Content="LZN-4" />
-        </Viewbox>
-        <Viewbox Grid.Row="10" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Platform1.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Row="10" Grid.Column="11" Margin="5" >
+      <Label Width="35" Content="LZN-4" />
+    </Viewbox>
+    <Viewbox Grid.Row="10" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Platform1.Score}" />
+    </Viewbox>
 
-        <Viewbox Grid.Row="11" Grid.Column="11" Margin="5" >
-            <Label Width="35" Content="LZN-2" />
-        </Viewbox>
-        <Viewbox Grid.Row="11" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Platform2.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Row="11" Grid.Column="11" Margin="5" >
+      <Label Width="35" Content="LZN-2" />
+    </Viewbox>
+    <Viewbox Grid.Row="11" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1">
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Platform2.Score}" />
+    </Viewbox>
 
-        <Viewbox Grid.Row="12" Grid.Column="11" Margin="5" >
-            <Label Width="35" Content="ObsM" />
-        </Viewbox>
-        <Viewbox Grid.Row="12" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Obstacle1.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Row="12" Grid.Column="11" Margin="5" >
+      <Label Width="35" Content="ObsM" />
+    </Viewbox>
+    <Viewbox Grid.Row="12" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Obstacle1.Score}" />
+    </Viewbox>
 
-        <Viewbox Grid.Row="13" Grid.Column="11" Margin="5" >
-            <Label Width="35" Content="ObsS" />
-        </Viewbox>
-        <Viewbox Grid.Row="13" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Obstacle2.Score}" />
-        </Viewbox>
+    <Viewbox Grid.Row="13" Grid.Column="11" Margin="5" >
+      <Label Width="35" Content="ObsS" />
+    </Viewbox>
+    <Viewbox Grid.Row="13" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.Obstacle2.Score}" />
+    </Viewbox>
 
-        <Rectangle Grid.Row="14" Grid.Column="12" Grid.ColumnSpan="4" Fill="AliceBlue" Height="1" Margin="0,5" />
+    <Rectangle Grid.Row="14" Grid.Column="12" Grid.ColumnSpan="4" Fill="AliceBlue" Height="1" Margin="0,5" />
 
-        <Viewbox Grid.Row="15" Grid.Column="11" Margin="5" >
-            <Label Width="35" Content="Total" />
-        </Viewbox>
-        <Viewbox Grid.Row="15" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
-            <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.TotalScore, Mode=OneWay}" IsReadOnly="True" />
-        </Viewbox>
-        <Viewbox Grid.Column="8" Margin="1,7,1,7" Grid.Row="4">
-            <Label Content="Start Lights:"  />
-        </Viewbox>
-        <Viewbox Grid.Row="4" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="7">
-            <CheckBox  IsChecked="{Binding StartLedUnionProperty, Mode=TwoWay}" IsEnabled="{Binding Arduino.ComOK}"/>
-        </Viewbox>
-        <Button Content="Back" Grid.Column="7" Margin="7" Grid.Row="9" Command="{Binding T1MotorBack, Mode=OneWay}" />
-        <Button Content="Fwd" Grid.Column="9" Margin="7" Grid.Row="9" Command="{Binding T1MotorFwd, Mode=OneWay}"/>
-        <Button Content="Test Play" Grid.Column="7" Grid.Row="10" Command="{Binding T1MotorPlay}"/>
-        <Button Content="Return Stop" Grid.Column="8" Grid.Row="10" Command="{Binding T1MotorReturn}"/>
-        <TextBox Grid.Column="7" Margin="5" Grid.Row="11" TextWrapping="Wrap" Text="{Binding Team1.TeamControl.Motor.BackwardTime, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="9" Margin="5" Grid.Row="11" TextWrapping="Wrap" Text="{Binding Team1.TeamControl.Motor.ForwardTime, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Force Stop" Grid.Column="8" Grid.Row="9" Command="{Binding T1MotorStop, Mode=OneWay}" Margin="0,0,0,2"/>
-        <Button Content="Test Pause" Grid.Column="9" Grid.Row="10" Grid.ColumnSpan="2" Margin="1,0,20,0" Command="{Binding T1MotorPause, Mode=OneWay}"/>
-        <Label Content="Red Motor Control" Grid.Column="7" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="8" Width="100" Grid.ColumnSpan="3"/>
+    <Viewbox Grid.Row="15" Grid.Column="11" Margin="5" >
+      <Label Width="35" Content="Total" />
+    </Viewbox>
+    <Viewbox Grid.Row="15" Grid.Column="12" Grid.ColumnSpan="4" Margin="0,1" >
+      <TextBox HorizontalContentAlignment="Center" Width="90" Text="{Binding Team2.TeamScore.TotalScore, Mode=OneWay}" IsReadOnly="True" />
+    </Viewbox>
+    <Viewbox Grid.Column="8" Margin="1,7,1,7" Grid.Row="4">
+      <Label Content="Start Lights:"  />
+    </Viewbox>
+    <Viewbox Grid.Row="4" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="7">
+      <CheckBox  IsChecked="{Binding StartLedUnionProperty, Mode=TwoWay}" IsEnabled="{Binding Arduino.ComOK}"/>
+    </Viewbox>
+    <Button Content="Back" Grid.Column="7" Margin="7" Grid.Row="7" Command="{Binding T1MotorBack, Mode=OneWay}" />
+    <Button Content="Fwd" Grid.Column="9" Margin="7" Grid.Row="7" Command="{Binding T1MotorFwd, Mode=OneWay}"/>
+    <Button Content="Test Play" Grid.Column="7" Grid.Row="8" Command="{Binding T1MotorPlay}"/>
+    <Button Content="Return Stop" Grid.Column="8" Grid.Row="8" Command="{Binding T1MotorReturn}"/>
+    <TextBox Grid.Column="7" Margin="5" Grid.Row="9" TextWrapping="Wrap" Text="{Binding Team1.TeamControl.Motor.BackwardTime, UpdateSourceTrigger=PropertyChanged}"/>
+    <TextBox Grid.Column="9" Margin="5" Grid.Row="9" TextWrapping="Wrap" Text="{Binding Team1.TeamControl.Motor.ForwardTime, UpdateSourceTrigger=PropertyChanged}"/>
+    <Button Content="Force Stop" Grid.Column="8" Grid.Row="7" Command="{Binding T1MotorStop, Mode=OneWay}" Margin="0,0,0,2"/>
+    <Button Content="Test Pause" Grid.Column="9" Grid.Row="8" Grid.ColumnSpan="2" Margin="1,0,20,0" Command="{Binding T1MotorPause, Mode=OneWay}"/>
+    <CheckBox Grid.Row="10" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team1.TeamControl.EnableLimitSwitches}" Margin="10.2,2.2,34,11.4" RenderTransformOrigin="-1.654,0.738"/>
+    <Label Content="Red Motor Control" Grid.Column="7" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="6" Width="100" Grid.ColumnSpan="3"/>
+    <Label Content="Limit Switch Mode:" Grid.Column="6" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="10" Width="105" Grid.ColumnSpan="4"/>
 
-        <Button Content="Back" Grid.Column="7" Margin="7" Grid.Row="13" Command="{Binding T2MotorBack, Mode=OneWay}" />
-        <Button Content="Fwd" Grid.Column="9" Margin="7" Grid.Row="13" Command="{Binding T2MotorFwd, Mode=OneWay}"/>
-        <Button Content="Test Play" Grid.Column="7" Grid.Row="14" Command="{Binding T2MotorPlay}"/>
-        <Button Content="Return Stop" Grid.Column="8" Grid.Row="14" Command="{Binding T2MotorReturn}"/>
-        <TextBox Grid.Column="7" Margin="5" Grid.Row="15" TextWrapping="Wrap" Text="{Binding Team2.TeamControl.Motor.BackwardTime, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="9" Margin="5" Grid.Row="15" TextWrapping="Wrap" Text="{Binding Team2.TeamControl.Motor.ForwardTime, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Force Stop" Grid.Column="8" Grid.Row="13" Command="{Binding T2MotorStop, Mode=OneWay}" Margin="0,0,0,2"/>
-        <Button Content="Test Pause" Grid.Column="9" Grid.Row="14" Grid.ColumnSpan="2" Margin="1,0,20,0" Command="{Binding T2MotorPause}"/>
-        <Label Content="Blue Motor Control" Grid.Column="7" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="12" Width="105" Grid.ColumnSpan="3"/>
-    </Grid>
+
+    <Button Content="Back" Grid.Column="7" Margin="7" Grid.Row="12" Command="{Binding T2MotorBack, Mode=OneWay}" />
+    <Button Content="Fwd" Grid.Column="9" Margin="7" Grid.Row="12" Command="{Binding T2MotorFwd, Mode=OneWay}"/>
+    <Button Content="Test Play" Grid.Column="7" Grid.Row="13" Command="{Binding T2MotorPlay}"/>
+    <Button Content="Return Stop" Grid.Column="8" Grid.Row="13" Command="{Binding T2MotorReturn}"/>
+    <TextBox Grid.Column="7" Margin="5" Grid.Row="14" TextWrapping="Wrap" Text="{Binding Team2.TeamControl.Motor.BackwardTime, UpdateSourceTrigger=PropertyChanged}"/>
+    <TextBox Grid.Column="9" Margin="5" Grid.Row="14" TextWrapping="Wrap" Text="{Binding Team2.TeamControl.Motor.ForwardTime, UpdateSourceTrigger=PropertyChanged}"/>
+    <Button Content="Force Stop" Grid.Column="8" Grid.Row="12" Command="{Binding T2MotorStop, Mode=OneWay}" Margin="0,0,0,2"/>
+    <Button Content="Test Pause" Grid.Column="9" Grid.Row="13" Grid.ColumnSpan="2" Margin="1,0,20,0" Command="{Binding T2MotorPause}"/>
+    <CheckBox Grid.Row="15" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Team2.TeamControl.EnableLimitSwitches}" Margin="10.2,2.2,34,11.4" RenderTransformOrigin="-1.654,0.738"/>
+    <Label Content="Blue Motor Control" Grid.Column="7" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="11" Width="105" Grid.ColumnSpan="3"/>
+    <Label Content="Limit Switch Mode:" Grid.Column="6" HorizontalAlignment="Left" Margin="51,2,0,10" Grid.Row="15" Width="105" Grid.ColumnSpan="4"/>
+  </Grid>
 </Window>
