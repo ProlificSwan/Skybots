@@ -5,6 +5,7 @@ using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
 using Robotics.GUI.Helpers;
+using Robotics.GUI.Model;
 
 namespace Robotics.GUI.Model
 {
@@ -33,7 +34,7 @@ namespace Robotics.GUI.Model
                 SetProperty(ref _backwardTime, value);
             }
         }
-
+        public bool LimitMode { get; set; }
         private int _forwardTime;
         private int _backwardTime;
         private int _lastForwardTime;
@@ -46,6 +47,7 @@ namespace Robotics.GUI.Model
         private bool _in2;
         private PauseableTimer _forwardTimer;
         private PauseableTimer _backwardTimer;
+        
 
         private enum MoveState
         {
@@ -56,7 +58,10 @@ namespace Robotics.GUI.Model
             PauseBack
         }
 
-        public MotorModel(short pinNumber1, short pinNumber2, bool in1, bool in2, int fwdTime = Constants.defaultMotorFwdTime, int backTime = Constants.defaultMotorBackTime)
+        public MotorModel(short pinNumber1, short pinNumber2, 
+          SensorModel frontLim, SensorModel backLim,
+          int fwdTime = Constants.defaultMotorFwdTime, int backTime = Constants.defaultMotorBackTime,
+          bool in1 = false, bool in2 = false)
         {
             this._pinNumber1 = pinNumber1;
             this._pinNumber2 = pinNumber2;
@@ -70,23 +75,9 @@ namespace Robotics.GUI.Model
             _forwardTimer.Elapsed += OnForwardTimerElapsed;
             _backwardTimer = new PauseableTimer(BackwardTime);
             _backwardTimer.Elapsed += OnBackwardTimerElapsed;
-        }
-
-        public MotorModel(short pinNumber1, short pinNumber2, int fwdTime = Constants.defaultMotorFwdTime, int backTime = Constants.defaultMotorBackTime)
-        {
-            this._pinNumber1 = pinNumber1;
-            this._pinNumber2 = pinNumber2;
-            this._in1 = false;
-            this._in2 = false;
-            ForwardTime = fwdTime;
-            _lastForwardTime = ForwardTime;
-            BackwardTime = backTime;
-            _lastBackwardTime = BackwardTime;
-            _forwardTimer = new PauseableTimer(ForwardTime);
-            _forwardTimer.Elapsed += OnForwardTimerElapsed;
-            _backwardTimer = new PauseableTimer(BackwardTime);
-            _backwardTimer.Elapsed += OnBackwardTimerElapsed;
-
+            frontLim.PropertyChanged += OnFrontLimitHit;
+            backLim.PropertyChanged += OnBackLimitHit;
+            LimitMode = false;
         }
         
         //Start timed motor movement or continue movement if paused.
@@ -97,8 +88,11 @@ namespace Robotics.GUI.Model
             {
                 _state = MoveState.MoveFwd;
                 Forward();
-                CheckIntervalChange();
-                _forwardTimer.Start();
+                if (!LimitMode)
+                {
+                  CheckIntervalChange();
+                  _forwardTimer.Start();
+                }
             }
             else if (_state == MoveState.PauseBack || _state ==MoveState.PauseFwd)
             {
@@ -136,8 +130,41 @@ namespace Robotics.GUI.Model
             CompleteLoop(); //keep running until told to do otherwise.
         }
 
-        //helper functon to ensure timers aren't affected by indecisive users (playing after rolling stop but before return to Start)
-        private void CompleteLoop()
+        private void OnFrontLimitHit(object sender, EventArgs e)
+        {
+          if (LimitMode)
+          {
+            SensorModel sense = (SensorModel)sender;
+            if (_state == MoveState.MoveBack && sense.CurrentState == true)
+            {
+              _state = MoveState.Start;
+              if (!_stopping)
+              {
+                Play();
+              }
+              else
+              {
+                _stopping = false;
+                Stop();
+              }
+            }
+          }
+        }
+
+        private void OnBackLimitHit(object sender, EventArgs e)
+        {
+          if (LimitMode)
+          {
+            SensorModel sense = (SensorModel)sender;
+            if (_state == MoveState.MoveFwd && sense.CurrentState == true)
+            {
+              _state = MoveState.MoveBack;
+              Backward();
+            }
+          }
+        }
+    //helper functon to ensure timers aren't affected by indecisive users (playing after rolling stop but before return to Start)
+    private void CompleteLoop()
         {
             if (_stopping)
             {
@@ -150,12 +177,13 @@ namespace Robotics.GUI.Model
             }
         }
 
-        //For use when a Play() is intenionally called close after
+        //For use when a Play() is intentionally called close after
         public void CancelRollingStop()
         {
             _stopping = false;
         }
 
+        //TODO: make this work with limit mode
         //Returns motors to known starting positions (based on forward/backward times) and then stops.
         //Does nothing if Play() was never called.
         public void RollingStop()
