@@ -41,6 +41,8 @@ namespace Robotics.GUI.Model
       EnableLimitSwitches = true;
     }
 
+    private bool _enableLimitSwitches;
+
     public LedModel Platform1Led { get; }
     public LedModel Platform2Led { get; }
     public LedModel Obstacle1Led { get; }
@@ -52,11 +54,14 @@ namespace Robotics.GUI.Model
     public SensorModel FrontLimSwitch { get; }
     public bool EnableLimitSwitches
     {
-      get { return EnableLimitSwitches; }
+      get
+      {
+        return _enableLimitSwitches;
+      }
       set
       {
-        EnableLimitSwitches = value;
         Motor.LimitMode = value;
+        SetProperty(ref _enableLimitSwitches, value);
       }
     }
 

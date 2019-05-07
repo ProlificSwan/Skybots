@@ -31,8 +31,11 @@ namespace Robotics.GUI.Model
         _keepAliveTimer.Elapsed += _keepAliveTimer_Elapsed;
         _keepAliveTimer.Start();
         //_session.SetSamplingInterval(400);
-        _session.SetDigitalPinMode(12, PinMode.InputPullup); //change in future        
-        //_session.SetDigitalPinMode(35, PinMode.InputPullup);        
+        _session.SetDigitalPinMode(Constants.rlimb, PinMode.InputPullup);
+        _session.SetDigitalPinMode(Constants.rlimf, PinMode.InputPullup);
+        _session.SetDigitalPinMode(Constants.blimb, PinMode.InputPullup);
+        _session.SetDigitalPinMode(Constants.blimf, PinMode.InputPullup);
+        _session.SetDigitalReportMode(Constants.limitSwitchPort, true);
         var tracker = _session.CreateDigitalStateMonitor(Constants.limitSwitchPort);        
         teamData1.TeamControl.BackLimSwitch.Subscribe(tracker);
         teamData1.TeamControl.FrontLimSwitch.Subscribe(tracker);
@@ -40,7 +43,7 @@ namespace Robotics.GUI.Model
         teamData2.TeamControl.FrontLimSwitch.Subscribe(tracker);
 
         //use code below to enable event managed pin updates
-        //_session.SetDigitalReportMode(1, true); 
+        
         //_session.DigitalStateReceived += DigitalStateReceivedHandler;
       }
 

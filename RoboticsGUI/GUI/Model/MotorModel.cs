@@ -135,7 +135,7 @@ namespace Robotics.GUI.Model
           if (LimitMode)
           {
             SensorModel sense = (SensorModel)sender;
-            if (_state == MoveState.MoveBack && sense.CurrentState == true)
+            if (_state == MoveState.MoveBack && sense.CurrentState == false)
             {
               _state = MoveState.Start;
               if (!_stopping)
@@ -156,7 +156,7 @@ namespace Robotics.GUI.Model
           if (LimitMode)
           {
             SensorModel sense = (SensorModel)sender;
-            if (_state == MoveState.MoveFwd && sense.CurrentState == true)
+            if (_state == MoveState.MoveFwd && sense.CurrentState == false)
             {
               _state = MoveState.MoveBack;
               Backward();
