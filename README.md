@@ -1,7 +1,7 @@
-This was used for the 2017 and 2018 Skybot challenge: https://skybotchallenge.us/
+This was used for the 2018 and 2019 Skybot challenges. Find more info here: https://skybotchallenge.us/
+Competition field in testing: https://youtu.be/0A1lKNkgoMs
 ![Skybot Scoring GUI](https://github.com/ProlificSwan/Skybots/raw/master/skybotController.png)
 ![Skybot Field Test](https://github.com/ProlificSwan/Skybots/raw/master/competitionFieldPieces.png)
-Competition field in testing: https://youtu.be/0A1lKNkgoMs
 
 The code is designed for a system where a PC/laptop communicates over USB with an Arduino which then updates I/O pins to reflect sent by the PC. The Arduino is connected to a number of LEDs and motors and there are some future plans to also hook up sensors to automate scoring.  If you would like to re-use this code for your own project, you will likely want to replace the constants found in Skybots/RoboticsGUI/GUI/Helpers/Constants.cs
 
